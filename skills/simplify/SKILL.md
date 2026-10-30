@@ -1,6 +1,6 @@
 ---
 name: simplify
-description: Simplify the current change for easier review while preserving quality and repository conventions. Use only when the user explicitly requests the simplify skill.
+description: Trigger this if the user says 'simplify'.
 disable-model-invocation: true
 ---
 
@@ -23,7 +23,10 @@ Look for concrete opportunities in the changed code:
 - Remove unnecessary abstractions, branches, options, and speculative handling.
   Reuse established patterns when they make the change easier to understand.
 - Simplify test setup, fixtures, mocks, and duplication while retaining distinct
-  behavioral cases, useful assertions, and regression coverage.
+  behavioral cases, useful assertions, and regression coverage. Excess tests
+  also add maintenance and review cost: avoid adding or retaining tests that
+  provide no meaningful regression protection, especially those duplicating
+  other tests or merely mirroring the implementation.
 - Shorten added comments that repeat the code. Keep explanations of intent,
   constraints, and non-obvious decisions that future readers need.
 - Avoid unrelated formatting, renames, refactors, and churn. Prefer a local
