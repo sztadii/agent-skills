@@ -5,27 +5,24 @@ description: Use whenever leaving comments on GitHub.
 
 # Leaving PR Comments
 
-Prefix every agent-authored comment left on the user's behalf with this GitHub
-note callout:
+Prefix every agent-authored comment left on the user's behalf with this
+attribution line:
 
 ```md
-> [!NOTE]
-> 🤖 **<model> responding on behalf of <user>**
+🤖 **<model> responding on behalf of <user>**
 
 Actual comment starts here.
 ```
 
 Use the verified public name of the model that wrote the comment, and the
-user's name or GitHub login.
-
-If the harness does not expose a model name, use the harness name. Do not guess.
+user's name or GitHub login. If the harness does not expose a model name,
+use the harness name. Do not guess.
 
 Before posting, check the entire comment, including quoted text and
 attachments, for secrets and private details.
 
-Keep the attribution inside the note and the actual reply outside it. The
-context line must start with the robot emoji. Do not add a horizontal rule,
-Setext underline, heading, signature footer, or a second attribution.
+Keep the attribution on its own line, followed by the reply. Do not add a
+callout, blockquote, heading, signature footer, or second attribution.
 
 Apply this format to top-level PR comments, inline review comments, replies to
 bots or reviewers, and written explanations used before resolving or
@@ -36,7 +33,9 @@ Write the comment itself in a direct style:
 
 - Lead with the conclusion.
 - Cite the relevant code, behavior, check, or reproduction.
-- Keep it concise and avoid filler, canned thanks, or status narration.
+- Use one sentence whenever possible, two at most (excluding the attribution).
+  Include only what the reviewer needs; avoid filler, canned thanks, and status
+  narration.
 - Distinguish verified facts from judgment.
 
 Preview the final Markdown before posting so quoting and blank lines render as
