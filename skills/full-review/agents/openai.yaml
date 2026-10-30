@@ -1,0 +1,4 @@
+interface:
+  display_name: "Full Review"
+  short_description: "Review a PR locally for correctness and simplicity"
+  default_prompt: "Use $full-review to check this PR locally, exercise its behavior, and report bugs or worthwhile simplifications."

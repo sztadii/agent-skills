@@ -71,28 +71,8 @@ Code that is `watch_pull_request`. If you stop before the merge, call
 
 ## Proof
 
-Proof is evidence you observed yourself in this session: command output, a
-reproduction, a recording, or a screenshot. Use the most direct proof the change allows:
-
-- Reproduce the original failure, apply the fix, then watch the same
-  reproduction pass.
-- Run the checks that the repo's CI runs (typecheck, lint, tests).
-- Add one focused test that fails without the fix, when the behavior has none
-  and the repo has a test setup.
-- For UI and runtime behavior, run the app and look at the change. Green mocked
-  tests do not prove that the user experience works. Prefer recordings over
-  screenshots when visual evidence helps and you can upload it to the PR.
-  Use a clear, readable resolution; 1080p is sufficient. Keep recordings short
-  and focused on the relevant flow, omitting setup and unnecessary idle time
-  without speeding up the interactions.
-  Demonstrate the flow at a natural manual pace: let each action's visible
-  result settle before the next, leaving time to read feedback. Avoid rapid
-  repeated actions that create duplicate toasts or other distracting artifacts.
-  Use screenshots when recording is unavailable or a still image better shows
-  the result.
-
-When you cannot find a way to prove a change, you do not have full confidence.
-Ask the user.
+Use [proof](../proof/SKILL.md) for local verification and visual evidence.
+If you cannot prove the change, follow "Asking the user" below.
 
 ## Merge gate
 
