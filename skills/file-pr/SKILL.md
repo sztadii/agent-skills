@@ -41,9 +41,14 @@ If model identity is unavailable, name the harness without guessing a model.
 Before submission, check the title, description, quotes, and attachments for
 secrets and private details.
 
-Open a real PR rather than a draft so review bots run. If `gh pr create` fails
+Always create PRs as drafts (`gh pr create --draft`, or `draft: true` in other
+tools). Only mark a PR ready for review on the user's explicit request for
+that PR. Green checks, review bots, or a request to finish or merge do not
+provide that permission.
+
+If `gh pr create` fails
 because the GraphQL rate limit is used up, open it through REST with
-`gh api repos/<owner>/<repo>/pulls -f title=... -f head=... -f base=... -F body=@<file>`. If the user also asked
+`gh api repos/<owner>/<repo>/pulls -f title=... -f head=... -f base=... -F body=@<file> -F draft=true`. If the user also asked
 to babysit it, continue with the `babysit-pr` skill.
 
 Do not post a follow-up PR comment unless it serves the user's request. When a

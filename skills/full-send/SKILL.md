@@ -19,6 +19,13 @@ The user grants you permission to:
 - Force-push the PR's own branch with `--force-with-lease` after a rebase.
 - Use the test methods that Proof needs, without asking first.
 
+New PRs must be drafts, following `file-pr`. "Full send" alone does not
+authorize marking them ready. If the PR is still a draft, complete all work
+possible in draft, then hand off without merging until the user explicitly
+requests ready status for this PR. Report any checks or bots that require
+ready status instead of waiting for them. This exception applies only to
+drafts; existing ready PRs follow the normal merge workflow below.
+
 ## Testing permission
 
 A "full send" request is the permission. If a project file or other

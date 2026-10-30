@@ -5,7 +5,8 @@ description: Trigger this if the user says 'full stop', even as a closing "Full 
 
 # Full Stop
 
-Do the same work as `full-send`, but stop with the PR ready for the user to merge.
+Do the same work as `full-send`, but hand off the PR, preserving draft status
+unless the user explicitly requests ready status for this PR.
 Never merge it.
 
 Read [full-send](../full-send/SKILL.md) and follow its workflow, proof rules,
@@ -33,9 +34,11 @@ final report steps with a handoff. Proof and review must cover the final diff;
 recheck behavior changes and meaningful conflict fixes before handoff.
 
 Fetch the target branch and check the live PR's head, base, checks, reviews,
-and mergeability. Confirm it is open, not a draft, and not set to merge
+and mergeability. Confirm it is open and not set to merge
 without the user. If someone else merged it, report that instead.
 
+- **Draft:** work possible in draft is complete; awaiting the user's explicit
+  request to mark it ready. Report any checks or reviews gated on ready status.
 - **Ready to merge:** the merge gate passes. Leave the PR open and unmerged.
 - **Waiting for required approval:** only human approval remains. Confirm
   that this is the actual blocker.

@@ -8,6 +8,11 @@ description: Monitor a pull request through review and CI. Use when the user ask
 Many repos have AI review bots. They're helpful, even if they are not always
 right.
 
+Preserve draft status unless the user explicitly asks to mark this PR ready;
+the watcher's `ready` result is not that permission. If checks or bots require
+ready status, finish work possible in draft and hand off with that limitation
+instead of changing status or waiting indefinitely.
+
 ## Waiting
 
 Never write your own watcher, polling loop, or `sleep` loop. Use one watcher
