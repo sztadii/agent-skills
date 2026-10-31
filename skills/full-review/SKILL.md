@@ -6,53 +6,28 @@ disable-model-invocation: true
 
 # Full Review
 
-Review someone else's PR by composing local proof and independent council review.
-Do not edit the author's branch, change Jira/PR status or merge. Never submit
-GitHub APPROVE or REQUEST_CHANGES. Local setup and execution are authorized.
+Review someone else's PR using local execution and independent council.
+Do not edit the author's branch, change Jira/PR status, merge, or submit GitHub
+APPROVE/REQUEST_CHANGES. Keep probes isolated and preserve local work.
 
-```ts
-async function fullReview(pr) {
-  const scope = await isolateExactHeadAndActualBase(pr); // Preserve local work; read repo/discussion.
-  const evidence = await proof({ ...scope, readOnly: true });
-  const review = await council(scope, evidence);
-  if (review.blocked) return reportAndAskForMissingDecision(review);
-  const findings = await verifyAndRankFindings(review); // Bugs vs simplifications vs pre-existing issues.
-  if (await headChanged(pr, scope)) return fullReview(pr); // Refresh only affected review/proof.
-  reportReviewedShaEvidenceFindingsAndLimitations(pr, scope, evidence, findings);
+1. Inspect the exact head, actual base, repo guidance and discussion. Run
+   [proof](../proof/SKILL.md) read-only and [council](../council/SKILL.md).
+   Continue static review if execution is blocked; disclose limits. Report
+   conflicts instead of fixing them. Council assesses simplicity without edits.
+2. Verify and rank findings, distinguishing bugs, simplifications and pre-existing
+   issues. Report reviewed SHA, evidence and limitations. If head changes,
+   refresh affected proof/review before publishing.
+3. Show exact inline comments with stable IDs and ask which to publish. Revalidate
+   the approved set against current head and publish resolvable threads on valid
+   diff lines using [leaving-pr-comments](../leaving-pr-comments/SKILL.md).
+   Report unanchorable findings instead of posting top-level comments. New
+   findings need approval.
+4. Follow agreed threads autonomously: read replies/latest source, verify claimed
+   fixes, then reply with evidence. Resolve only own threads after a verified fix
+   or explained withdrawal and a successfully posted reply. “Fixed”, outdated
+   diffs and green CI alone are insufficient.
 
-  const comments = await showExactInlineCommentsWithStableIds(findings);
-  const selected = await askWhichCommentsToPublish(comments);
-  if (!selected.length) return;
-  await revalidateAgainstCurrentHead(selected);
-  const threads = await publishInlineThreads(selected); // leaving-pr-comments
-  return followUpOnAgreedFindings(pr, threads);
-}
-
-async function followUpOnAgreedFindings(pr, threads) {
-  await inspectRepliesAndLatestHead(pr);
-  await verifyClaimedFixesWithProof(threads);
-  await replyWithEvidence(threads); // No approval needed for replies within agreed findings.
-  await resolveOwnVerifiedThreadsAfterReply(threads);
-  if (await ownFindingsRemainOpen(threads) && await prIsOpen(pr)) {
-    return watchAndEndTurn(pr); // Resume here on event; never poll.
-  }
-  await unwatch(pr);
-  return reportReviewOutcome(pr); // "Review done" only when agreed findings are settled.
-}
-```
-
-Load [proof](../proof/SKILL.md), [council](../council/SKILL.md) and
-[leaving-pr-comments](../leaving-pr-comments/SKILL.md). For event waiting, load
-[watching](../babysit-pr/references/watching.md), not the PR maintenance workflow.
-Council checks simplicity
-without invoking simplify's edits on another author's work. Continue static
-review when execution is blocked; report unverified behavior honestly.
-Keep probes separate; report conflicts rather than fixing the author's branch.
-
-Publish only the approved set as resolvable inline threads on valid diff lines;
-report findings that cannot be anchored instead of posting top-level comments.
-New findings need approval. A claim of “fixed”, outdated diff or green CI alone
-is insufficient. Resolve only own threads after verified fix or explained
-withdrawal. Parent uses the supported watcher and ends turn; delegates never
-watch. Unwatch before handback/question. Stop on user request, closure or a
-required decision; preserve pending findings and reviewed SHA across turns.
+Use [watching](../babysit-pr/references/watching.md) while agreed findings remain
+open; do not invoke PR maintenance. Preserve pending findings and reviewed SHA
+across wakes. Report completion only when agreed findings are settled; stop on
+user request, closure or a required decision.

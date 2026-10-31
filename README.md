@@ -15,7 +15,7 @@ when called. Existing explicit-invocation settings are preserved.
 | Skill | Responsibility | Result |
 | --- | --- | --- |
 | `simplify` | Simplify task code without changing behavior | Smaller, clearer task diff |
-| `proof` | Exercise actual behavior and inspect evidence | Revision, checks, recordings/artifacts and gaps |
+| `proof` | Exercise actual behavior and inspect evidence | Revision, checks, suitable evidence and gaps |
 | `council` | Independent read-only review by three providers | Verdict, findings, rounds and scores |
 | `file-pr` | Publish prepared changes and evidence | New draft or updated existing PR |
 | `jira-status` | Reconcile linked issue assignment and milestone | Verified Jira state |
@@ -39,10 +39,12 @@ Once council is satisfied, `file-pr` publishes the draft without a user review
 checkpoint. `babysit-pr` then autonomously handles CI failures, comments and
 conflicts, refreshing evidence and review before publishing fixes.
 
-UI interactions require an inspected before/after recording, attached or linked
-for reviewers. Offline dependencies call for a simulator, fixture or minimal
-mock of the dependency while exercising the actual UI. A concrete missing-proof
-exception needs explicit acceptance; tests alone do not replace a recording.
+Proof uses evidence suited to the change: screenshots, recordings or commands
+and observed output. Recordings and before/after comparisons are optional;
+when capture is unavailable, use an adequate alternative. Attach or link visual
+evidence for reviewers. Label simulated dependencies and report their limits.
+A real verification gap needs explicit acceptance before filing a PR; a missing
+recording alone is not a gap.
 
 The PR stays draft. Available checks settling does not authorize ready status or
 merge. If a check requires ready status, report that limitation. Linked Jira
