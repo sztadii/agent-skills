@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Review"
+  short_description: "Review changes and follow up on valid findings"
+  default_prompt: "Use $full-review to review this PR, publish substantiated findings and follow up on its review threads."
+policy:
+  allow_implicit_invocation: false

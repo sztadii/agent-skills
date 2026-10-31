@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Send"
+  short_description: "Deliver a feature through a verified draft PR"
+  default_prompt: "Use $full-send to implement this task, verify and review it, publish a draft PR and handle CI and feedback autonomously. Keep it draft unless I explicitly request ready status."
+policy:
+  allow_implicit_invocation: false
