@@ -6,10 +6,46 @@ disable-model-invocation: true
 
 # File PR
 
-Before filing, check whether a PR for this branch already exists. Review the
-diff locally against the intended target branch to make sure its contents
-match the goal. Use the existing PR target or the user-specified base; otherwise
-detect the repository default branch instead of assuming `main`.
+## Prepare the branch
+
+A request to file a PR includes committing and pushing the task's changes when
+needed. Honor user restrictions and any approval checkpoint in the calling
+skill before taking those actions. This skill alone does not authorize unrelated
+edits, force-pushing, marking a PR ready, or merging.
+
+Inspect the current branch, remotes, and `git status --short`, including staged
+and untracked files. Identify the task's changes and preserve unrelated work.
+If on the default branch or a detached HEAD, create a task branch before
+committing. If task and unrelated changes cannot be separated confidently,
+ask about the ambiguous scope instead of staging everything.
+
+Check for an open PR from this branch in the intended repository, including
+fork ownership. Use its target branch or the user-specified base; otherwise
+detect the repository default branch instead of assuming `main`. If the user
+requests a different base from an existing PR, clarify before retargeting it
+or creating another PR. A closed or merged PR is history, not an open PR to
+reuse; start a fresh task branch if the current branch was already merged.
+
+Review the complete task diff against the target's merge base, including
+uncommitted changes, to confirm it matches the goal. If there is no task diff
+against the base, report that there is nothing to file. Use available
+verification results and run relevant repository-required checks; report gaps honestly.
+Stage only task changes, inspect the staged diff, and commit if needed using
+repository conventions. Reuse existing commits when there is nothing to commit.
+Push the task branch to the verified remote, setting its upstream if missing.
+If the push is rejected, inspect the divergence and report it rather than
+force-pushing. Confirm the remote head matches the intended local commit before
+filing.
+
+## Reuse an existing PR
+
+If an open PR already covers this branch and target, use it instead of creating
+a duplicate. Push new task commits and update its title or description only
+where needed to reflect the final change and verification. Preserve unrelated
+user-authored content and its current draft/ready status. If it is already
+current, return its URL without making unnecessary changes.
+
+## Write and create the PR
 
 PR titles usually become commit messages, so follow the repository's title
 conventions. Look at recently merged PRs and Git history for examples. Prefer a
@@ -55,3 +91,11 @@ to babysit it, continue with the `babysit-pr` skill.
 
 Do not post a follow-up PR comment unless it serves the user's request. When a
 comment is needed, use the `leaving-pr-comments` skill.
+
+## Verify and report
+
+After creation or update, verify the PR URL, base branch, head SHA, and
+draft/ready status. Follow the harness's PR-linking requirements immediately
+after creating, taking over, or pushing to a PR. Return the URL, whether the PR
+was created or reused, verification results, and any blockers. Do not claim
+creation or a successful push when the tool did not confirm it.

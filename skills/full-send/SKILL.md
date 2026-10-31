@@ -33,21 +33,22 @@ data deletion, unrelated work, or bypassing branch protection or harness rules.
    browser automation, simulators, and captures, within harness permissions.
    Follow repository commands and fixtures. Report blocked verification instead
    of treating source inspection as proof.
-4. **Get independent feedback.** Have a read-only reviewer inspect the complete
-   diff, including untracked task files, against a fixed merge base. Provide the
-   checkout, scope, intent, checks, and relevant repo guidance. Ask for concrete
-   correctness, regression, and integration findings with evidence; the reviewer
-   must not edit, publish, or delegate further. Use available delegation under
-   the harness rules, without requiring a specific model or another review skill.
-   Keep reviewed files stable while the reviewer works. Evaluate findings
-   yourself, fix real issues, and rerun affected proof. Request
-   focused re-review for substantive risky fixes; report unresolved disagreement
-   or unavailable independent review before asking the user to proceed.
+4. **Run council review.** Invoke [council](../council/SKILL.md) for independent
+   review by three providers. Give its reviewers the checkout, fixed merge base,
+   complete diff including untracked task files, scope, intent, proof/check
+   results, and relevant repo guidance. Ask for concrete correctness, regression,
+   and integration findings with evidence. Reviewers must not edit, publish, or
+   delegate further; keep reviewed files stable until they finish. Evaluate
+   findings, apply justified fixes within the task, rerun affected proof, and
+   follow council's re-review procedure. Retain its rounds, scores, findings,
+   and disagreements for the user review and PR description. If council or a
+   required provider is unavailable, report the blocker and ask how to proceed;
+   do not silently substitute a single reviewer or self-review.
 
 ## User review before creating a PR
 
 Before creating any new PR, present the completed diff (with a way to inspect
-it), change summary, proof/check results, reviewer findings, remaining gaps,
+it), change summary, proof/check results, council results, remaining gaps,
 and proposed PR title and description. Ask the user to inspect and approve
 creation. Explain that this checkpoint is required by this skill. Do not create
 even a draft before that approval. Silence or a request for corrections is not
@@ -66,9 +67,9 @@ it within the user's scope, without opening a duplicate.
 ## File, review, and merge
 
 After approval, use [file-pr](../file-pr/SKILL.md) to create a draft with concise
-proof in its description. Creating a draft and marking it ready are separate
-actions: full send alone does not authorize ready status. Honor an explicit
-ready request for this PR, including one supplied with creation approval;
+proof and council results in its description. Creating a draft and marking it
+ready are separate actions: full send alone does not authorize ready status.
+Honor an explicit ready request for this PR, including one supplied with creation approval;
 otherwise finish work possible in draft and hand off for that decision.
 
 Use [babysit-pr](../babysit-pr/SKILL.md) to handle CI and review. Verify fixes
@@ -83,9 +84,9 @@ for user input.
 Merge only when all of these hold on the current head:
 
 - Proof covers the final changes and required checks are green.
-- Independent review covers the final behavior diff, substantive findings are
-  resolved, required
-  approvals are present, and no human review still requests changes.
+- Council review covers the final behavior diff, substantive findings are
+  resolved, required approvals are present, and no human review still requests
+  changes.
 - Relevant review bots have finished according to repository/babysit rules;
   findings, including older unresolved comments, are fixed or dismissed with
   evidence. Do not bypass a required human approval.

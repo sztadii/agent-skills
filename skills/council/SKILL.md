@@ -31,7 +31,7 @@ Count each full review pass as one round.
 A fresh review after fixes starts a new round.
 
 If the work ends in a pull request, put the results in the PR description.
-Put this section before the model and harness line at the end:
+Use this section without adding a model or harness attribution footer:
 
 ```markdown
 ## Council review

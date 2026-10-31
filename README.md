@@ -33,7 +33,7 @@ locally. Reports observed results and adds regression coverage when needed.
 > Implement APP-142: prevent duplicate form submissions. Full send.
 
 Assigns the linked ticket to your verified Jira account and moves it to the
-workflow's development status. Implements, verifies, and independently reviews
+workflow's development status. Implements, verifies, and invokes `council` to review
 the change, then shows you the diff, evidence, and proposed PR text. Waits for
 your approval before creating a draft. Marking it ready requires your explicit
 request; Jira moves to In Review when the work is actually handed off for review.
@@ -42,7 +42,7 @@ request; Jira moves to In Review when the work is actually handed off for review
 
 > PR #84 implements APP-142 and is already ready for review. Full send: address remaining feedback, verify the changes, and merge once the merge gate passes.
 
-Verifies and reviews the change, handles CI and feedback, then merges when
+Verifies the change, invokes `council`, handles CI and feedback, then merges when
 the gate passes and moves the linked Jira issue to the workflow's equivalent
 of Ready for QA / To Test. No duplicate PR or creation approval is needed.
 Use `jira-status` separately when you want milestone tracking without full send.
@@ -51,9 +51,9 @@ Use `jira-status` separately when you want milestone tracking without full send.
 
 > Use file-pr to open a draft PR for the pagination fix on this branch. Explain that page 2 previously repeated page 1, and include the verification results.
 
-Checks for an existing PR, reviews the diff against the base, and writes a
-concise title and description following repository conventions. Creates a
-draft PR without marking it ready or merging it.
+Reviews the task diff, commits and pushes task changes when needed, and reuses
+an existing PR or creates a draft. Writes a concise title and description
+following repository conventions, then verifies and returns the PR link and status.
 
 ### 5. Review a teammate's PR — `full-review`
 
@@ -92,7 +92,8 @@ merging under this request.
 
 > Add a Clear filters button to the orders table. It should reset all filters and return to page 1. Full send.
 
-Implements the task, verifies actual behavior, and obtains independent review.
+Implements the task, verifies actual behavior, and invokes `council` for review
+by three providers.
 Shows you the complete diff, evidence, and proposed PR title and description
 before asking for approval to create a draft. After you request ready status,
 handles CI and review and merges only when the merge gate passes.
