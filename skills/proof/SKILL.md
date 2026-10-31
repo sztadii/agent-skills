@@ -9,6 +9,11 @@ Verify the actual changed behavior locally. Follow the repository's setup and
 testing instructions and the invoking workflow's permissions; this skill does
 not itself authorize publishing, production changes, or destructive actions.
 
+Before claiming the change works, confirm that the running app uses the intended
+checkout and commit (the current remote head when testing a branch or PR), then
+exercise the specific behavior being fixed. An HTTP 200 response alone does not
+prove that the app or the fix works.
+
 Proof is evidence you observed yourself in this session: command output, a
 reproduction, a recording, or a screenshot. Use the most direct proof the
 change allows:
