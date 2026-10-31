@@ -6,47 +6,42 @@ disable-model-invocation: true
 
 # Proof
 
-Verify the actual changed behavior yourself in this session, following repo
-setup and testing instructions. This skill does not authorize publishing,
-production changes, or destructive actions.
+Verify actual changed behavior locally. Authorizes ordinary setup and execution,
+not publication, production changes, or destructive actions.
 
-1. **Identify what runs.** Confirm the checkout, revision, and local edits used
-   by the running app or command, plus the environment and relevant data. Test
-   the intended PR head when reviewing a PR; do not mistake a stale build or
-   another server for the changed version.
-2. **Control the scenario.** Prefer an existing mock server, sandbox, fixture,
-   or equivalent controlled test environment when it faithfully exercises the
-   change. Do not require or build one merely for this skill. State what is
-   mocked; mock success does not verify an external integration. Exercise that
-   integration when relevant and authorized, or report the remaining gap.
-3. **Exercise the change.** For a bug fix, reproduce on the base and run the
-   same scenario on the changed revision. For a feature, verify the requested
-   behavior and relevant failure cases. Run the actual UI flow, endpoint, or
-   command, plus the repo's required lint, typecheck, and tests as applicable.
-   HTTP 200, source inspection, and green mocked tests alone are insufficient.
-   Add a focused regression test when fixing a bug with missing coverage and
-   an existing test setup; during review, report the gap without editing the
-   author's code. For prose-only changes, use direct content/link validation
-   instead of inventing runtime proof.
-4. **Capture and inspect evidence.** For visual behavior, capture comparable
-   before/after states with the same inputs, app state, viewport, and framing.
-   Use recordings for interactions or timing and screenshots for static changes;
-   if recording is unavailable, report the attempted capture method, concrete
-   blocker, and what screenshots cannot prove. A passing E2E without a capture
-   does not satisfy visual evidence, especially when it tests another scenario.
-   For existing edits, obtain the base in an isolated environment without overwriting
-   work; for new features, show the prior experience. Label revisions and keep
-   artifacts local unless publication is authorized. Open both captures and play
-   back recordings to verify readable, faithful evidence at a natural pace.
-   When the calling workflow authorizes PR publication, pass the inspected
-   artifacts to that workflow for attachment and access verification; a local
-   capture alone does not complete the PR evidence step. For nonvisual behavior,
-   retain reproduction commands and observed output.
-5. **Verify the final state.** After edits, rebases, or conflict resolution,
-   rerun affected checks and scenarios; earlier proof does not cover changed
-   behavior. Report the verified revision/local state, scenario, expected versus
-   observed result, check outcomes, evidence links, and remaining gaps.
+```ts
+async function proof(scope) {
+  const running = await confirmRevisionEnvironmentAndData(scope);
+  if (!running.hasRunnableBehavior) return validateContentAndLinks(scope);
 
-If a baseline, capture, integration, or check cannot be obtained, say what you
-tried and what remains unverified. Continue useful checks, but never invent
-missing evidence or claim complete proof or 100% correctness from partial results.
+  if (!await liveDependencyAvailable()) {
+    await trySimulatorFixtureOrMinimalDependencyMock(); // Exercise actual UI; label mocks.
+  }
+  await reproduceOnBaseOrShowPriorExperience(scope);
+  await exerciseChangedFlowAndFailureCases(scope); // Actual UI, endpoint or CLI.
+  await runRepositoryRequiredChecks(scope);
+
+  if (scope.visual) {
+    const captures = await captureComparableBeforeAndAfter({
+      format: scope.interaction ? "recording" : "screenshots",
+    });
+    await openCapturesAndPlayRecordings(captures);
+  } else {
+    await retainCommandsAndObservedOutput();
+  }
+  return { snapshot: running.snapshot, ...await collectChecksArtifactsAndGaps() };
+}
+```
+
+Identify evidence by revision and local diff, including untracked task files.
+Match inputs, app state, viewport and framing across captures. For permission
+changes, exercise the action with and without permission. An offline device is
+not by itself a recording blocker. Tests, source inspection and HTTP 200 do not
+replace exercising the behavior or recording the changed interaction.
+
+Use an isolated base without overwriting work. Report missing regression
+coverage to the implementation workflow; read-only reviews do not edit author code.
+After behavior edits or conflict fixes, rerun affected verification. Mock success
+does not prove the live integration. If blocked, retain attempts and name exactly
+what remains unverified; never claim complete proof. Keep artifacts local unless
+the calling workflow authorizes publication; pass inspected evidence to file-pr.

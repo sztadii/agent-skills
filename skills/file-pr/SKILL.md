@@ -6,109 +6,49 @@ disable-model-invocation: true
 
 # File PR
 
-## Prepare the branch
+Publish an already prepared change and its evidence as a draft PR, or update the
+matching open PR. Authorizes task commits/pushes and publication of inspected
+evidence. Does not implement, simplify, perform council review or manufacture
+proof. Missing preparation returns a blocker to the caller.
 
-A request to file a PR includes committing and pushing the task's changes when
-needed. The request also authorizes draft creation without a separate approval
-question. Honor explicit user restrictions and any applicable approval checkpoint
-in the calling skill before taking those actions. This skill alone does not
-authorize unrelated edits, force-pushing, marking a PR ready, or merging.
+```ts
+async function filePr(scope, evidence, review) {
+  await inspectBranchRemotesAndAllTaskChanges(scope);
+  const existing = await findMatchingOpenPrAndActualBase(scope);
+  await ensureTaskBranch(); // Fresh branch if default, detached or already merged.
+  const diff = await inspectCompleteMergeBaseDiff(scope);
+  if (!diff.hasTaskChanges) return { blocked: "Nothing to file" };
+  if (!evidenceMatchesCurrentDiff(evidence)) return { blocked: "Run proof on current changes" };
+  if (review && !reviewMatchesCurrentDiff(review)) return { blocked: "Refresh council review" };
+  if (requiredEvidenceMissingWithoutExplicitException(evidence)) return { blocked: evidence.gaps };
 
-Inspect the current branch, remotes, and `git status --short`, including staged
-and untracked files. Identify the task's changes and preserve unrelated work.
-If on the default branch or a detached HEAD, create a task branch before
-committing. If task and unrelated changes cannot be separated confidently,
-ask about the ambiguous scope instead of staging everything.
+  const attachments = await prepareInspectedEvidenceForReviewers(evidence);
+  if (attachments.blocked && !attachments.acceptedException) return attachments;
+  const text = await writeProblemFirstPrText(diff, attachments, review);
+  await checkTextAndAttachmentsForPrivateData(text, attachments);
+  await stageOnlyTaskChangesInspectAndCommitIfNeeded();
+  await pushToVerifiedRemote(); // Immediately follow harness linking rules for an existing PR.
+  await confirmRemoteHeadMatchesLocal();
+  const pr = existing ? await updatePreservingUserContentAndStatus(existing, text)
+    : await createDraftPr(text);
+  await linkPrImmediately(pr);
+  await verifyAttachmentsAccessibleAndPrUrlBaseHeadStatus(pr);
+  return { pr, evidence, review };
+}
+```
 
-Check for an open PR from this branch in the intended repository, including
-fork ownership. Use its target branch or the user-specified base; otherwise
-detect the repository default branch instead of assuming `main`. If the user
-requests a different base from an existing PR, clarify before retargeting it
-or creating another PR. A closed or merged PR is history, not an open PR to
-reuse; start a fresh task branch if the current branch was already merged.
+New PRs are always drafts. Never mark ready, merge, force-push after rejection,
+or duplicate an open PR. Preserve existing status and unrelated user content.
+Ask about ambiguous scope/base. Standalone invocation obtains missing proof via
+[proof](../proof/SKILL.md), then retries publication; do not file with a silent gap.
 
-Review the complete task diff against the target's merge base, including
-uncommitted changes, to confirm it matches the goal. If there is no task diff
-against the base, report that there is nothing to file. Use available
-verification results and run relevant repository-required checks; report gaps honestly.
-Stage only task changes, inspect the staged diff, and commit if needed using
-repository conventions. Reuse existing commits when there is nothing to commit.
-Push the task branch to the verified remote, setting its upstream if missing.
-If the push is rejected, inspect the divergence and report it rather than
-force-pushing. Confirm the remote head matches the intended local commit before
-filing.
+UI interactions require an inspected recording linked in the description;
+a local path is not an attachment. If capture/upload fails, return attempts,
+concrete blocker and unverified scenario. Only an explicit exception permits
+filing with that gap, recorded in both description and handoff. Repair missing
+evidence in existing PRs too.
 
-## Reuse an existing PR
-
-If an open PR already covers this branch and target, use it instead of creating
-a duplicate. Push new task commits and update its title or description only
-where needed to reflect the final change and verification. Preserve unrelated
-user-authored content and its current draft/ready status. If it is already
-current, return its URL without making unnecessary changes.
-
-## Write and create the PR
-
-PR titles usually become commit messages, so follow the repository's title
-conventions. Look at recently merged PRs and Git history for examples. Prefer a
-concise, human-readable title that explains why the change matters:
-
-BAD
-
-> ❌ perf(server): negotiate permessage-deflate on the websocket
-
-GOOD
-
-> ✅ perf(server): cut websocket frame size by 70%+ with gzipping
-
-Open the description with a simple explanation of the problem based on the
-user's original prompt, then briefly explain the solution. Do not lead with an
-implementation inventory:
-
-BAD
-
-> ❌ Removed implicit workspace carry-over from every "new thread" entry point (cmd+n / cmd+shift+o, sidebar v1/v2 buttons, command palette). New threads inherit only the project from context; branch, worktree, and env mode always come from the configured defaults. Deleted buildContextualThreadOptions, startNewThreadInProjectFromContext, and the v1 sidebar's seed-context machinery.
-
-GOOD
-
-> ✅ My "new worktree" default was ignored when starting new threads on existing worktrees. Super unintuitive. Now your preferences always apply.
-
-Do not add AI attribution, signatures, or promotional footers to PR titles or
-descriptions, such as `Created with GPT-6 Astra in T3 Code.`, `Generated by ...`,
-or similar mentions of the model, assistant, harness, or tool used to create
-the change. This also applies to subagent attribution.
-
-Carry forward visual evidence produced during verification into the PR: attach
-the inspected recordings/screenshots or include reviewer-accessible links.
-Filing the PR authorizes publishing task evidence after checking it for private
-data. Do not treat a local artifact path as an uploaded attachment. For UI
-interaction changes, a recording of the changed scenario is required. If it is
-missing, use [proof](../proof/SKILL.md) to capture and inspect it before handoff.
-An existing PR needs the same evidence; add missing evidence when resuming it.
-Link the recording in the PR description and verify reviewer access. If capture
-or upload cannot be completed, report the attempted method, concrete blocker,
-and missing scenario in both the PR description and handoff. Retain any local
-artifact and explicitly mark visual proof incomplete.
-
-Before submission, check the title, description, quotes, and attachments for
-secrets and private details.
-
-Always create PRs as drafts (`gh pr create --draft`, or `draft: true` in other
-tools). Only mark a PR ready for review on the user's explicit request for
-that PR. Green checks, review bots, or a request to finish or merge do not
-provide that permission.
-
-If `gh pr create` fails
-because the GraphQL rate limit is used up, open it through REST with
-`gh api repos/<owner>/<repo>/pulls -f title=... -f head=... -f base=... -F body=@<file> -F draft=true`. If the user also asked
-to babysit it, continue with the `babysit-pr` skill.
-
-Do not post a follow-up PR comment unless it serves the user's request. When a
-comment is needed, use the `leaving-pr-comments` skill.
-
-## Verify and report
-
-After creation or update, verify the PR URL, base branch, head SHA, and
-draft/ready status. Follow the harness's PR-linking requirements immediately
-after creating, taking over, or pushing to a PR. Return the URL, whether the PR
-was created or reused, verification results, and any blockers. Do not claim
-creation or a successful push when the tool did not confirm it.
+Follow repo title conventions; explain the problem and resulting behavior.
+Include supplied council rounds/scores in a `Council review` table in the
+description, not a comment. No AI attribution/footer in titles or descriptions.
+On GraphQL exhaustion, create via REST with `draft=true`.

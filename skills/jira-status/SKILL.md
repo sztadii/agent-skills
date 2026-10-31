@@ -6,53 +6,36 @@ disable-model-invocation: true
 
 # Jira Status
 
-Activate when the user explicitly invokes `$jira-status` or names this skill,
-or when another skill invokes it for a task with a linked Jira issue.
-Keep it active for that task across follow-up turns; do not apply it to unrelated
-tasks. Preserve the issue key and verified milestone in handoff context. Never
-change Jira status when reviewing someone else's PR, even if this skill is mentioned.
-Invocation authorizes these status changes and assignment to the requesting
-user, not other issue edits, comments, marking a PR ready, or merging.
+Track the linked issue across this task and follow-ups. Authorizes assignment
+to the verified requesting user and milestone transitions only. Never update
+Jira while reviewing someone else's PR.
 
-## Identify the issue and workflow
+```ts
+async function jiraStatus(task, event = latestVerifiedMilestone(task)) {
+  if (task.reviewingSomeoneElsesPr) return;
+  const issue = await resolveUnambiguousLinkedIssue(task);
+  if (!issue && !task.hasIssueReference) return;
+  if (!issue) return askForUnambiguousIssue();
+  const workflow = await readIssueAndAvailableTransitions(issue);
 
-Use the issue key or URL provided by the user, or an unambiguous reference in
-the current task, branch, or PR. If ambiguous, ask for the key while continuing
-independent work; do not update every issue mentioned in a PR.
+  if (task.implementationBegun) {
+    const user = await resolveVerifiedRequestingUser();
+    if (!user) return askForIdentity();
+    await assignIfNeeded(issue, user);
+  }
+  const milestone = await verifyMilestone(task, event);
+  const status = milestone.prMergeConfirmed ? "Ready for QA / To Test"
+    : milestone.completedVerifiedChangePublished ? "In Review"
+    : milestone.implementationBegunOrResumed ? "In Development / In Progress"
+    : undefined;
 
-Read the issue, current status, and available transitions using Jira tools.
-Use the actual workflow's matching status or clear equivalent, not hardcoded
-transition IDs. Ask if no equivalent is clear. Do not assume Done means Ready
-for QA without project evidence.
+  if (status) await transitionToActualWorkflowEquivalent(issue, status);
+  return rereadAndReportVerifiedState(issue);
+}
+```
 
-When implementation begins, also set Assignee to the requesting user, even if
-the issue is already In Progress or assigned to someone else. Resolve their
-Jira account ID from the connector's authenticated-user lookup or an explicitly
-confirmed identity; do not guess from the local username or use an automatic
-default assignee. If identity is unclear, ask while continuing independent
-work. Skip assignment if already correct and re-read to verify any change.
-If invoked after implementation began, reconcile assignment then as well.
-
-## Update at milestones
-
-| Verified event | Jira status or project equivalent |
-| --- | --- |
-| Begin implementation, including investigating the assigned bug | In Development / In Progress |
-| Completed, verified change is published in a PR (draft or ready) | In Review / Code Review |
-| The PR delivering the task is confirmed merged | Ready for QA / To Test |
-
-Apply the latest verified milestone; skip an already matching status and do
-not regress a later status merely to replay earlier milestones. Resuming
-implementation or addressing review findings may return the task from review
-to In Progress when implementation actually resumes. A completed, verified
-change published in a draft PR qualifies for In Review: do not wait for the PR
-to be marked ready, CI to finish, or further user approval. An early draft with
-unfinished implementation stays In Development. Reconcile this milestone on
-resumption if the PR was already published but Jira was left in development.
-A merge request or queued merge does not establish completion.
-
-Re-read after each transition to verify success, and before retrying an
-uncertain write. If blocked, report the issue key and blocker and continue
-independent work. Never invent required values or force unrelated transitions;
-stop retrying if the same failure repeats. Briefly report the verified status
-or unresolved blocker in the handoff.
+Use actual workflow equivalents, never guessed transition IDs, identity or Done
+as an assumed QA status. Skip matching state; do not regress merely to replay
+milestones. Unfinished drafts remain in development; queued merges are not merged.
+Reconcile on resume. If writes fail, re-read before retrying and stop on repeated
+failure. Do not create tickets or change unrelated fields to satisfy this skill.

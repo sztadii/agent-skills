@@ -1,6 +1,6 @@
 interface:
   display_name: "Full Send"
-  short_description: "Verify, review, open a draft, and track Jira"
-  default_prompt: "Use $full-send to complete this task, create a draft PR after verification and independent review without a separate creation approval, and track linked Jira milestones through merge."
+  short_description: "Deliver and maintain a verified draft PR"
+  default_prompt: "Use $full-send to implement, simplify, verify with proof and council, publish a draft PR, and autonomously handle feedback, conflicts and CI while keeping it draft."
 policy:
   allow_implicit_invocation: false
