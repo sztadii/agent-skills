@@ -7,10 +7,10 @@ disable-model-invocation: true
 # Full Send
 
 An explicit full-send request authorizes implementation, local verification,
-independent review, commits and pushes on the task branch, rebasing that branch
-with `--force-with-lease`, and merge once the gates below pass. Prepare the work
-autonomously, but let the user inspect and amend it before creating a new PR.
-Do not assume the user is absent. This does not authorize production changes,
+independent review, commits and pushes on the task branch, creating a draft PR,
+rebasing that branch with `--force-with-lease`, and merge once the gates below
+pass. Complete these authorized steps autonomously without a separate
+pre-PR approval checkpoint. This does not authorize production changes,
 data deletion, unrelated work, or bypassing branch protection or harness rules.
 
 ## Prepare and verify
@@ -31,6 +31,10 @@ data deletion, unrelated work, or bypassing branch protection or harness rules.
 3. **Prove it.** Use [proof](../proof/SKILL.md). The request authorizes ordinary
    local setup and test methods needed for this task, including app execution,
    browser automation, simulators, and captures, within harness permissions.
+   For changed UI interactions, obtain and inspect a before/after recording
+   demonstrating the actual changed scenario; an unrelated passing E2E is not
+   a substitute. Include evidence publication in the task PR as part of this
+   authorization, after checking captures for secrets and private data.
    Follow repository commands and fixtures. Report blocked verification instead
    of treating source inspection as proof.
 4. **Run council review.** Invoke [council](../council/SKILL.md) for independent
@@ -41,41 +45,47 @@ data deletion, unrelated work, or bypassing branch protection or harness rules.
    delegate further; keep reviewed files stable until they finish. Evaluate
    findings, apply justified fixes within the task, rerun affected proof, and
    follow council's re-review procedure. Retain its rounds, scores, findings,
-   and disagreements for the user review and PR description. If council or a
+   and disagreements for the final report and PR description. If council or a
    required provider is unavailable, report the blocker and ask how to proceed;
    do not silently substitute a single reviewer or self-review.
 
-## User review before creating a PR
+## Draft creation and user inspection
 
-Before creating any new PR, present the completed diff (with a way to inspect
-it), change summary, proof/check results, council results, remaining gaps,
-and proposed PR title and description. Ask the user to inspect and approve
-creation. Explain that this checkpoint is required by this skill. Do not create
-even a draft before that approval. Silence or a request for corrections is not
-approval. Apply requested corrections, refresh affected verification, and show
-the updated result before asking again. Reuse explicit approval of the current
-reviewed result; do not repeatedly ask for the same action. If behavior or scope
-changes after approval (including during conflict resolution), refresh proof
-and show the revised diff for approval before creation. A clean rebase with
-unchanged behavior does not by itself require another approval.
+After verification and independent review, create the draft PR and provide its
+link, change summary, proof/check results, council results, and remaining gaps
+for inspection. Do not stop at a local patch, proposed PR text, or a question
+asking whether to create the draft: full-send already authorizes that action.
+Reuse an existing PR for the task instead of opening a duplicate.
 
-Use the harness's supported approval/question mechanism, or a final question
-if none is appropriate. Unwatch any owned PR before a handoff for user input.
-An existing PR does not need approval to be created again: inspect and update
-it within the user's scope, without opening a duplicate.
+If the user explicitly requests inspection or approval before publication,
+honor that restriction: prepare the complete diff, evidence, and proposed PR
+text, then wait for approval. Ask for clarification when scope or a required
+decision is genuinely unresolved; ordinary in-scope fixes and rebases only
+require refreshed verification, not renewed permission to create the draft.
 
 ## File, review, and merge
 
-After approval, use [file-pr](../file-pr/SKILL.md) to create a draft with concise
-proof and council results in its description. Creating a draft and marking it
-ready are separate actions: full send alone does not authorize ready status.
-Honor an explicit ready request for this PR, including one supplied with creation approval;
+Use [file-pr](../file-pr/SKILL.md) to create a draft with concise
+proof and council results in its description. Attach the inspected visual
+evidence or include a reviewer-accessible link. A local path is not a published
+attachment. Before handoff, verify the recording is linked in the PR description
+and accessible to reviewers. On resumption, repair missing evidence in an
+existing task PR rather than only reporting test results again. If capture or
+upload is blocked, state the attempted method, concrete reason, and missing
+scenario in the PR and handoff; visual proof remains incomplete until resolved.
+
+Creating a draft and marking it ready are separate actions: full send alone does not authorize ready status.
+Honor an explicit ready request for this PR, including one supplied with the initial request;
 otherwise finish work possible in draft and hand off for that decision.
 
 Use [babysit-pr](../babysit-pr/SKILL.md) to handle CI and review. Verify fixes
 before pushing, and refresh proof after meaningful rebases or conflict fixes.
-When the completed PR is actually handed off for review, use jira-status to
-move the ticket to In Review or its equivalent; a draft alone is insufficient.
+Immediately after creating or updating the PR with the completed, verified
+change, use jira-status to move the ticket to In Review or its equivalent and
+re-read the issue to confirm. This applies to draft PRs too: do not wait for
+ready status, CI completion, or another user message. If resuming a published
+PR, reconcile this milestone before handing back. An early work-in-progress
+draft with unfinished implementation does not reach this milestone.
 Follow babysit-pr's environment-specific waiting instructions: in T3 Code,
 arm the watcher and end the turn; elsewhere use its supported wait command.
 Do not create a polling loop. Unwatch before handing control back or asking

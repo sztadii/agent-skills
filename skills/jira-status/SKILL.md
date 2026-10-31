@@ -38,14 +38,18 @@ If invoked after implementation began, reconcile assignment then as well.
 | Verified event | Jira status or project equivalent |
 | --- | --- |
 | Begin implementation, including investigating the assigned bug | In Development / In Progress |
-| Change and verification are complete, and the PR is awaiting review | In Review / Code Review |
+| Completed, verified change is published in a PR (draft or ready) | In Review / Code Review |
 | The PR delivering the task is confirmed merged | Ready for QA / To Test |
 
 Apply the latest verified milestone; skip an already matching status and do
 not regress a later status merely to replay earlier milestones. Resuming
 implementation or addressing review findings may return the task from review
-to In Progress. A draft PR alone does not establish review readiness; a merge
-request or queued merge does not establish completion.
+to In Progress when implementation actually resumes. A completed, verified
+change published in a draft PR qualifies for In Review: do not wait for the PR
+to be marked ready, CI to finish, or further user approval. An early draft with
+unfinished implementation stays In Development. Reconcile this milestone on
+resumption if the PR was already published but Jira was left in development.
+A merge request or queued merge does not establish completion.
 
 Re-read after each transition to verify success, and before retrying an
 uncertain write. If blocked, report the issue key and blocker and continue

@@ -31,12 +31,17 @@ production changes, or destructive actions.
 4. **Capture and inspect evidence.** For visual behavior, capture comparable
    before/after states with the same inputs, app state, viewport, and framing.
    Use recordings for interactions or timing and screenshots for static changes;
-   if recording is unavailable, disclose what screenshots cannot prove. For
-   existing edits, obtain the base in an isolated environment without overwriting
+   if recording is unavailable, report the attempted capture method, concrete
+   blocker, and what screenshots cannot prove. A passing E2E without a capture
+   does not satisfy visual evidence, especially when it tests another scenario.
+   For existing edits, obtain the base in an isolated environment without overwriting
    work; for new features, show the prior experience. Label revisions and keep
    artifacts local unless publication is authorized. Open both captures and play
    back recordings to verify readable, faithful evidence at a natural pace.
-   For nonvisual behavior, retain reproduction commands and observed output.
+   When the calling workflow authorizes PR publication, pass the inspected
+   artifacts to that workflow for attachment and access verification; a local
+   capture alone does not complete the PR evidence step. For nonvisual behavior,
+   retain reproduction commands and observed output.
 5. **Verify the final state.** After edits, rebases, or conflict resolution,
    rerun affected checks and scenarios; earlier proof does not cover changed
    behavior. Report the verified revision/local state, scenario, expected versus

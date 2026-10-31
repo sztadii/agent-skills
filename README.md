@@ -28,15 +28,16 @@ when calling another skill, load its `SKILL.md` and follow its instructions.
 Reproduces the failure, applies a focused fix, and runs the affected command
 locally. Reports observed results and adds regression coverage when needed.
 
-### 2. Implement a Jira ticket with a pre-PR review — `full-send`
+### 2. Implement a Jira ticket and open a draft PR — `full-send`
 
 > Implement APP-142: prevent duplicate form submissions. Full send.
 
 Assigns the linked ticket to your verified Jira account and moves it to the
 workflow's development status. Implements, verifies, and invokes `council` to review
-the change, then shows you the diff, evidence, and proposed PR text. Waits for
-your approval before creating a draft. Marking it ready requires your explicit
-request; Jira moves to In Review when the work is actually handed off for review.
+the change, then creates a draft PR and shares its link, evidence, and review
+results without a separate creation approval. Marking it ready requires your explicit
+request; Jira moves to In Review as soon as the completed, verified change is
+published in the draft PR.
 
 ### 3. Finish an existing PR and update Jira after merge — `full-send`
 
@@ -94,6 +95,7 @@ merging under this request.
 
 Implements the task, verifies actual behavior, and invokes `council` for review
 by three providers.
-Shows you the complete diff, evidence, and proposed PR title and description
-before asking for approval to create a draft. After you request ready status,
+Creates a draft PR and shares the diff, evidence, and review results for your
+inspection without pausing for creation approval. Moves linked Jira work to
+In Review even while the PR is a draft. After you request ready status,
 handles CI and review and merges only when the merge gate passes.
