@@ -1,31 +1,56 @@
 ---
 name: file-pr
-description: Trigger this if the user says 'file-pr' or 'file pr', or another skill invokes it.
+description: Commit and publish prepared task changes as a new PR or update the matching PR, with relevant verification and an accurate description. Use independently when implementation is ready to publish.
 disable-model-invocation: true
 ---
 
 # File PR
 
-Publish prepared task changes as a draft PR, or update the matching open PR.
-Authorizes task commits, pushes and inspected evidence publication.
+Turn prepared changes into one verified PR publication. Invocation authorizes
+in-scope commits, pushes, PR creation or updates and publication of inspected
+evidence. No prior skill run, council approval or special evidence format is
+required. It does not implement features, perform broad cleanup, maintain CI
+indefinitely or merge.
 
-1. Inspect the full task diff, including untracked files, branch, remote and actual
-   base. Preserve unrelated work; use a fresh task branch if on default, detached
-   or already merged. Reuse an existing PR; clarify ambiguous scope or base.
-2. Require current [proof](../proof/SKILL.md) and refresh any supplied council
-   review invalidated by changes. Standalone use obtains missing proof; callers
-   receive preparation blockers. Evidence format belongs to proof. Attach or link
-   visual artifacts for reviewers; use adequate alternatives if capture/upload
-   fails. Any remaining verification or access gap needs explicit acceptance.
-3. Write a concise problem-and-result description following repo conventions.
-   Include checks, evidence, accepted gaps and supplied council rounds/scores in
-   a `Council review` table. Preserve unrelated user content; omit AI attribution.
-   Check text and attachments for private data.
-4. Commit only task changes, push to the verified remote and confirm remote head.
-   Create a draft or update the existing PR, immediately following harness PR
-   linking rules after pushes/creation. Verify URL, base, head, status and evidence
-   access. On GraphQL exhaustion, use REST with `draft=true` for creation.
+## Prepare
 
-Do not implement, simplify or run council here. Never mark ready, merge,
-duplicate an open PR or force-push after rejection. Preserve existing PR status.
-Return the PR URL, revision and evidence or a concrete blocker.
+1. Identify task files, actual base, branch, remote and matching open PR. Include
+   staged, unstaged and untracked changes in inspection; exclude unrelated work
+   from commits. Use a task branch when on the default branch, detached HEAD or
+   a previously merged branch. Infer the target from the request, existing PR
+   and repository conventions; ask only if competing targets remain ambiguous.
+2. Inspect the full proposed diff. Reuse verification that still matches this
+   code; otherwise run affected checks and repository-required validation directly.
+   No proof or council invocation is necessary. Do not represent a caller's stale
+   review as approval of new code.
+3. If a required check fails or behavior remains unverified, identify the gap.
+   For a new PR, publish a draft with the limitation clearly stated unless the
+   request explicitly excludes drafts. For an existing draft, update it with the
+   gap disclosed; for an existing ready PR, return the blocker without pushing
+   unverified changes or silently changing its status. If the caller requires
+   a verified ready PR, return the blocker instead. Do not repair product code
+   under this skill or ask the user to waive routine verification.
+4. Write a concise problem-and-result title and description following the repo
+   template. Include relevant checks, evidence and limitations. Add supplied
+   review findings only when useful; do not invent scores or require a review
+   table. Preserve unrelated user-authored description content. Inspect text and
+   attachments for private data; use accessible evidence links where available.
+
+## Publish
+
+Commit only the prepared task changes and push to the verified remote. Reuse the
+matching PR. New PRs are ready for review after verification unless the user or
+caller requests draft status; existing PRs retain their status unless changing it
+is authorized. Never overwrite remote commits after a rejected push. Reconcile
+with the remote first; history rewriting requires authorization and a lease.
+
+Create or update the PR, obey the host's immediate PR-linking requirements after
+creation or pushes, then verify URL, base, remote head, body and status. Inspect
+remote state after ambiguous API failures before retrying to avoid duplicate PRs
+or comments. REST is an option when a GraphQL request is unavailable.
+
+## Result
+
+Return the PR URL, published head, draft/ready state, verification and any gaps.
+Publication is this skill's endpoint; pending CI is reported, not called success
+of the checks. Hand ongoing maintenance back to a caller that requested it.

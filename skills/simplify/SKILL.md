@@ -1,32 +1,43 @@
 ---
 name: simplify
-description: Trigger this if the user says 'simplify', or another skill invokes it.
+description: Simplify a specified change or code area while preserving behavior, then verify the edits. Use for focused cleanup without starting a delivery or PR workflow.
 disable-model-invocation: true
 ---
 
 # Simplify
 
-Simplify the task's code without changing intended behavior. Return the updated
-diff and rationale; verification and independent approval belong to proof and
-council. No commits, pushes, publication or PR status changes.
+Produce clearer code and a verified local diff. This skill works on its own;
+it needs no PR, council review, proof skill or full-send run. It does not commit,
+push, publish comments or change PR status.
 
-```ts
-async function simplify(scope) {
-  const diff = await inspectCompleteTaskDiffAndNearbyConventions(scope);
-  const before = await measureDiff(diff.fixedMergeBase);
-  const opportunities = await findSimplifications(diff, [
-    "unnecessary abstractions and speculative branches",
-    "duplicate code, test setup and redundant assertions",
-    "comments repeating code and deviations from existing patterns",
-  ]);
-  await applyWorthwhileInScopeChanges(opportunities);
-  return reportChangedPathsRationaleAndDiffSize(before, diff.fixedMergeBase);
-}
-```
+## Scope
 
-Preserve unrelated work, meaningful test cases, validation and error handling.
-Smaller is a preference, not a quota: do not hide complexity in helpers or weaken
-coverage to reduce lines. No worthwhile edit is a valid result. Fix the actual
-base and include untracked task files; ask if committed scope is ambiguous.
-Return changed paths and verification needs to the caller. When invoked alone,
-use [proof](../proof/SKILL.md) on affected behavior before reporting completion.
+Use the files or change identified by the user or caller. Otherwise inspect the
+current task diff, including staged, unstaged and untracked task files and task
+commits against the actual base. Infer scope from the conversation and repository
+before asking. An empty diff is a valid no-op, not permission to clean up the repo.
+Preserve unrelated changes and existing public behavior.
+
+## Work
+
+1. Read the relevant code, callers, tests and repository instructions. Look for
+   unnecessary indirection, duplicate logic, speculative branches and departures
+   from established patterns. Prefer edits that reduce the effort of understanding
+   or changing the code; fewer lines alone is not a reason to refactor.
+2. Apply worthwhile changes directly. Preserve validation, error handling,
+   compatibility and meaningful regression coverage. Avoid unrelated dependency
+   upgrades, API redesigns and broad formatting churn.
+3. Run checks relevant to the edits and repository-required validation. Exercise
+   behavior where structural checks are insufficient. Reuse current evidence for
+   untouched paths; do not require a separate verification workflow. If an edit
+   introduces a regression, fix it or undo only that edit.
+
+Make routine implementation choices autonomously. If a genuine ambiguity would
+change behavior or scope, complete the independent cleanup first and report the
+specific decision needed. Do not invent a simplification to produce a diff.
+
+## Result
+
+Return changed paths, why the code is clearer, checks and observed results, and
+any remaining verification gap. State when no worthwhile change was found.
+The caller may continue delivery; standalone use ends here.

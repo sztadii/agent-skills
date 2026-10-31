@@ -1,0 +1,6 @@
+interface:
+  display_name: "File PR"
+  short_description: "Publish prepared changes with current evidence"
+  default_prompt: "Use $file-pr to verify and publish the prepared task changes as a PR, or update the matching PR."
+policy:
+  allow_implicit_invocation: false

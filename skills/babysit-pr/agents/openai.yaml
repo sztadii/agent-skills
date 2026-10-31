@@ -1,0 +1,6 @@
+interface:
+  display_name: "Babysit PR"
+  short_description: "Maintain PR checks, feedback and conflicts"
+  default_prompt: "Use $babysit-pr to maintain this PR through CI, review feedback and conflicts until its requested endpoint is reached."
+policy:
+  allow_implicit_invocation: false

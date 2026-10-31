@@ -1,76 +1,97 @@
-# My global skills
+# Agent skills
 
-Install all skills globally:
+Eight focused skills for autonomous development. Each accepts the initial task
+context, does its own work and returns a concrete result. None requires a prior
+full-send run. Full-send composes the delivery process when that is what you ask for.
+
+## Install and invoke
 
 ```sh
 npx skills add sztadii/agent-skills -g --skill '*'
 ```
 
-Or install one: `npx skills add sztadii/agent-skills -g --skill full-send`.
-Invoke a skill by name, `$skill-name`, or from another skill. Load its `SKILL.md`
-when called. Existing explicit-invocation settings are preserved.
+Install just one with `npx skills add sztadii/agent-skills -g --skill simplify`.
+Use `$skill-name`, its name in a request, or invoke it from another workflow.
+Explicit-invocation settings are preserved in `SKILL.md` for hosts that support
+that flag and in `agents/openai.yaml` for Codex. Load a skill's instructions when using it.
+The repository is the source; installed copies need an update to receive changes.
 
-## Responsibilities
+## Choose the result
 
-| Skill | Responsibility | Result |
+| Skill | Owns | Endpoint when used alone |
 | --- | --- | --- |
-| `simplify` | Simplify task code without changing behavior | Smaller, clearer task diff |
-| `proof` | Exercise actual behavior and inspect evidence | Revision, checks, suitable evidence and gaps |
-| `council` | Independent read-only review by three providers | Verdict, findings, rounds and scores |
-| `file-pr` | Publish prepared changes and evidence | New draft or updated existing PR |
-| `jira-status` | Reconcile linked issue assignment and milestone | Verified Jira state |
-| `leaving-pr-comments` | Format and verify authorized PR comments | Posted comment/thread reference |
-| `babysit-pr` | Maintain the task PR through feedback, conflicts and CI | Verified fixes or an explicit blocker |
-| `full-send` | Compose implementation, simplification, proof, review and PR maintenance | Verified draft PR |
-| `full-review` | Compose proof, council and agreed review follow-up | Evidence-backed review of another author's PR |
+| `simplify` | Focused cleanup and affected validation | Clearer, verified local diff, or justified no-op |
+| `proof` | Behavioral verification and inspected evidence | Passed, failed or incomplete claims; no product edits |
+| `council` | Independent agent reviews and reconciliation | Findings and clear / changes needed / incomplete verdict |
+| `file-pr` | Task commits, push and PR creation/update | Published PR with current evidence and status |
+| `leaving-pr-comments` | Requested comments, replies and thread resolution | Verified posted URLs, or text for a draft-only request |
+| `babysit-pr` | Existing PR's CI, feedback and conflicts | Settled required checks/reviews, or requested merge |
+| `full-review` | Thorough review and follow-up on its findings | Local report, or published findings with settled threads |
+| `full-send` | Implementation through delivery and maintenance | Verified ready PR, or initially requested merge/deployment |
 
-Workflow functions are TypeScript-style pseudocode, not executable APIs. Linked
-skills own their details. Preserve task scope and current revision across turns;
-refresh affected proof and council after substantive changes.
+Focused skills include the checks needed for their own result. Simplify does not
+need proof, publishing does not need council, and babysit-pr does not need file-pr.
+Full-review performs its own review and may reuse council or leaving-pr-comments.
+Full-send can use the focused skills when installed; its instructions also cover
+the phases when installed alone. There is no mandatory circular workflow.
 
-## Deliver a feature
+## Deliver from initial context
 
-> Implement APP-142: prevent duplicate form submissions. Full send.
+> Full-send: prevent duplicate form submissions. Preserve the existing API and
+> cover retry after a failed submission.
 
-`full-send` assigns the linked Jira issue, implements and simplifies the change,
-verifies behavior with `proof`, and obtains independent `council` review. The
-caller applies justified findings and repeats affected verification/review.
-Once council is satisfied, `file-pr` publishes the draft without a user review
-checkpoint. `babysit-pr` then autonomously handles CI failures, comments and
-conflicts, refreshing evidence and review before publishing fixes.
+The agent establishes acceptance criteria, implements and simplifies the change,
+verifies behavior, obtains independent review, addresses valid findings, publishes
+a ready PR and handles CI, feedback and conflicts. It makes routine choices and
+continues between phases without asking you to approve each transition.
 
-Proof uses evidence suited to the change: screenshots, recordings or commands
-and observed output. Recordings and before/after comparisons are optional;
-when capture is unavailable, use an adequate alternative. Attach or link visual
-evidence for reviewers. Label simulated dependencies and report their limits.
-A real verification gap needs explicit acceptance before filing a PR; a missing
-recording alone is not a gap.
+The default endpoint is a ready PR whose current-head required checks and reviews
+are satisfied and relevant feedback is settled. Include “merge when checks and
+reviews pass” or a specific deployment destination in the initial request when
+that is the endpoint. “Draft only” and other scope limits remain binding.
+Required human approvals and missing access cannot be fabricated or bypassed.
 
-The PR stays draft. Available checks settling does not authorize ready status or
-merge. If a check requires ready status, report that limitation. Linked Jira
-moves to In Review when the completed change is published, including in a draft.
-A later, separately requested and confirmed merge can move it to Ready for QA.
+If essential verification or independent review cannot complete, the agent keeps
+useful work in a clearly labelled draft and reports incomplete delivery with the
+specific gap. It does not ask you to routinely waive checks or report an unfinished
+PR as delivered. Optional artifacts or an absent optional bot do not block work.
+No skill updates an issue tracker as a side effect.
 
-## Review another author's PR
-
-> Full review of PR #91. Verify the export flow and report bugs or simplifications.
-
-`full-review` uses local `proof` and independent `council` without editing the
-author's branch. It shows proposed inline comments for approval, publishes only
-the selected set, then autonomously verifies fixes and replies in those threads.
-It does not submit GitHub APPROVE, change Jira or merge.
-
-## Use a focused skill
+## Use each skill independently
 
 > Simplify this diff while preserving behavior and useful regression coverage.
 
-> Use proof to reproduce this CLI bug and verify the fix with the actual command.
+> Proof: reproduce this CLI bug and verify whether the current change fixes it.
 
-> File-pr for the prepared pagination fix, including its inspected evidence.
+> Council: review this migration plan for compatibility and rollback risks.
 
-> Babysit PR #84: address valid feedback and CI failures, keep it draft.
+> File-pr: publish the prepared pagination fix as a draft with its evidence.
 
-In T3 Code the owning parent uses the PR watcher and ends the turn; delegated
-reviewers never watch. No custom polling loops. Stop watching before handback or
-a user decision. Report unavailable providers, missing proof or infrastructure
-blockers rather than claiming complete verification.
+> Leaving-pr-comments: post a reply on this thread explaining the verified fix.
+
+> Babysit-pr: address valid feedback and CI failures on PR #84; keep it draft.
+
+> Full-review PR #91: verify the export flow and follow up on actionable findings.
+
+> Full-review this local diff; return a report only.
+
+A PR full-review includes publishing substantiated comments and following its own
+threads, without an extra comment-selection checkpoint. A report-only or local
+review does not publish. Requests to draft or reword a comment return text only.
+Reviews leave the author's implementation unchanged and default to COMMENT rather
+than formal APPROVE or REQUEST_CHANGES decisions.
+
+Council uses two independent agents on the current provider with inherited
+settings unless you specify reviewers. Explicit provider/model choices are never
+silently replaced. Missing reviewers are disclosed; optional stylistic objections
+do not create an endless approval loop.
+
+## Continue across events
+
+Retain scope, endpoint, revision, evidence and pending work across turns. Refresh
+verification and review only where changes invalidate them. In T3 Code the owning
+parent handles immediate work, registers the PR event watcher and yields;
+delegated reviewers never watch. Resume the pending phase on events. Stop watches
+on completion, cancellation or blocked handback. There is no custom polling script.
+Without a working watcher, disclose that maintenance is not continuing in the
+background. Distinguish waiting on an external event from completed delivery.

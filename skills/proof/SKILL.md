@@ -1,35 +1,48 @@
 ---
 name: proof
-description: Trigger this if the user says 'proof', or another skill invokes it.
+description: Verify a change or reproduce a reported behavior using relevant checks and inspected evidence. Use when a claim needs validation, independently of implementation, review or PR publication.
 disable-model-invocation: true
 ---
 
 # Proof
 
-Verify the changed behavior locally and retain evidence suited to the change.
-Authorizes ordinary setup and execution, not publication, production changes
-or destructive actions.
+Establish what works, what fails and what remains unverified. Run independently
+on local code, a commit, a PR or a reproduction request. No other skill is required.
+Ordinary local setup and isolated probes are in scope; product-code fixes,
+commits, publication and production mutations are not.
 
-- Confirm the revision, local diff and relevant environment. Exercise the changed
-  UI, endpoint or CLI and relevant failure cases. For content-only changes,
-  validate the content and links instead.
-- Run repository-required checks and affected verification. If a live dependency
-  is unavailable, use a simulator, fixture or minimal mock when practical;
-  identify what it cannot verify.
-- Choose evidence that clearly demonstrates the result: screenshots for visible
-  states, a recording when motion or a sequence matters, or commands and observed
-  output for nonvisual behavior. Before/after evidence is optional.
-- Inspect screenshots and other artifacts; play recordings before using them.
-  If recording is unavailable or adds little value, use screenshots or other
-  suitable evidence. A missing recording alone is not a verification gap and
-  does not require an exception. Do not keep retrying capture when an adequate
-  alternative exists.
-- Report what was exercised, the observed result, checks and artifact paths,
-  and any behavior that remains unverified. Evidence must support the claim:
-  a screenshot of the final state alone does not prove timing or a whole flow,
-  and mock success does not prove a live integration.
+## Verify
 
-After behavior edits or conflict fixes, rerun affected verification. Read-only
-reviews do not edit author code. Keep artifacts local unless the calling workflow
-authorizes publication; pass inspected evidence to file-pr. If blocked, state
-what remains unverified without claiming complete proof.
+1. Identify the claim, acceptance criteria, actual base and exact revision. Include
+   the working-tree diff and relevant untracked files when verifying local work.
+   Read repository instructions and choose the smallest meaningful checks that
+   can disprove the claim, plus required repository checks.
+2. Run the affected tests and exercise the relevant UI, endpoint, command or data
+   flow. Cover meaningful failure cases and regressions. For content-only work,
+   check structure, consistency and links instead of inventing runtime tests.
+3. Use available local services or fixtures when appropriate. If a dependency is
+   unavailable, try a practical substitute and state exactly which live behavior
+   it cannot establish. A failed command, missing check or mocked integration is
+   never a pass for the original claim.
+4. Keep evidence suited to the claim: command and observed output, an inspected
+   screenshot for a visible state, or a recording for timing and interaction.
+   Follow the host's browser and capture rules. Inspect artifacts before citing
+   them. Recording and before/after capture are optional; use an adequate
+   alternative without repeatedly retrying a broken capture tool.
+
+Do not alter the implementation to make verification pass. Keep temporary probes
+isolated, clean up only resources created by this run, and preserve user work.
+On failure, diagnose enough to identify an actionable cause and return it to the
+caller. Do not start full-send or a repair loop.
+
+## Result
+
+Report the tested revision and local diff identity, the environment, commands or
+steps, observed outcomes, evidence paths and limitations. Use `passed`, `failed`
+or `incomplete` for each claim; the overall result cannot be passed while a
+required claim is failed or unverified. Keep evidence local unless publication
+was separately included in the request or calling workflow.
+
+Evidence belongs to the tested code and environment. A caller changing behavior,
+dependencies or conflict resolutions must refresh the affected checks; unchanged
+evidence can be reused with its original scope clearly stated.
