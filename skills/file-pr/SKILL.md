@@ -6,8 +6,9 @@ description: File a concise pull request. Use when the user asks to file, open, 
 # File PR
 
 Before filing, check whether a PR for this branch already exists. Review the
-diff locally against the base branch (usually `origin/main`) to make sure its
-contents match the goal.
+diff locally against the intended target branch to make sure its contents
+match the goal. Use the existing PR target or the user-specified base; otherwise
+detect the repository default branch instead of assuming `main`.
 
 PR titles usually become commit messages, so follow the repository's title
 conventions. Look at recently merged PRs and Git history for examples. Prefer a

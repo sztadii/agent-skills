@@ -27,7 +27,7 @@ a check fails, the required checks pass, someone comments or reviews, or the
 branch conflicts.
 
 - **Only the thread that owns the PR watches it.** If you are a delegated
-  child task (a reviewer, a Sol round, any `delegate_task` child), never call
+  child task (a reviewer or any `delegate_task` child), never call
   `watch_pull_request`. The parent owns the PR. Do not watch PRs you are not
   working on.
 - **A wake is news, not a merge decision.** Check the merge gate yourself.
@@ -80,9 +80,11 @@ used up, the REST limit is separate and usually still has room. Use
 
 ## Reviews
 
-Only act on checks and comments newer than the latest push. Verify every bot
-finding against the source before changing code. Fix real findings and CI
-failures, distinguish repository failures from infrastructure flakes, and reply
+Evaluate checks for the current head. Carry unresolved review findings forward
+regardless of comment age; a push or outdated diff does not resolve them. Verify
+each against the latest source before changing code or marking it resolved. Fix
+real findings and CI failures, distinguish repository failures from infrastructure
+flakes, and reply
 with a written reason when dismissing false positives.
 
 If the repo has `.macroscope/check-run-agents/*.md`, read those rules before you
@@ -106,7 +108,8 @@ narrows code.
 
 ## Base branch and merging
 
-Keep an eye on changes to `main` and rebase when needed. `pr-wait` reports when
+Track the PR's actual target branch and rebase onto it when needed. Do not
+assume it is `main`. `pr-wait` reports when
 new base commits touch this PR's files, and when the PR becomes BEHIND or DIRTY.
 `watch_pull_request` reports conflicts only, so check for BEHIND yourself
 before you call the PR ready.

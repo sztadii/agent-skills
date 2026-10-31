@@ -1,17 +1,17 @@
 ---
 name: jira-status
-description: Assign the Jira issue to the user and track its status during implementation, PR review handoff, and merge only when explicitly invoked. Excludes reviewing someone else's PR.
+description: Assign the Jira issue to the user and track its status during implementation, PR review handoff, and merge when explicitly invoked or used by full-send for a linked task. Excludes reviewing someone else's PR.
 ---
 
 # Jira Status
 
-Activate only when the user explicitly invokes `$jira-status` or names this
-skill. Keep it active for that task across follow-up turns, including a later
-full-merge or full-send request; do not apply it to unrelated tasks. Preserve
-the issue key and verified milestone in handoff context. Never change Jira
-status when reviewing someone else's PR, even if this skill is mentioned.
-Invocation authorizes these status changes and assignment to the requesting user, not other issue edits,
-comments, marking a PR ready, or merging.
+Activate when the user explicitly invokes `$jira-status` or names this skill,
+or when an explicit full-send request covers a task with a linked Jira issue.
+Keep it active for that task across follow-up turns; do not apply it to unrelated
+tasks. Preserve the issue key and verified milestone in handoff context. Never
+change Jira status when reviewing someone else's PR, even if this skill is mentioned.
+Invocation authorizes these status changes and assignment to the requesting
+user, not other issue edits, comments, marking a PR ready, or merging.
 
 ## Identify the issue and workflow
 
@@ -36,7 +36,7 @@ If invoked after implementation began, reconcile assignment then as well.
 
 | Verified event | Jira status or project equivalent |
 | --- | --- |
-| Begin implementation, including investigating the assigned bug | In Progress |
+| Begin implementation, including investigating the assigned bug | In Development / In Progress |
 | Change and verification are complete, and the PR is awaiting review | In Review / Code Review |
 | The PR delivering the task is confirmed merged | Ready for QA / To Test |
 

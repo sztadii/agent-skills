@@ -12,11 +12,17 @@ well-scoped change untouched is a valid outcome.
 
 ## Scope and candidates
 
-Use the scope and base-selection steps from [sol-loop](../sol-loop/SKILL.md).
-Review the whole proposed change against that fixed base, including untracked
-files, not just the latest commit. Read nearby code and tests for conventions.
-Preserve unrelated working changes. Record the starting diff size; include
-new files when comparing the final result.
+Inspect `git status --short` and identify the user's change paths; preserve
+unrelated working changes. Fetch the relevant remote when available. For a PR,
+use its actual target branch and confirm the local revision matches the intended
+PR head plus any task edits. Otherwise use the repository's default branch or
+the user's specified base. Fix the merge-base SHA for the entire review. With
+no remote, use the user's base, or HEAD for uncommitted changes only; ask if the
+committed scope cannot be determined.
+
+Review base to working tree, including untracked files, not just the latest
+commit. Read nearby code and tests for conventions. Record the starting diff
+size, including new files, and use the same scope and base for the final count.
 
 Look for concrete opportunities in the changed code:
 
@@ -36,29 +42,36 @@ Do not optimize line count by compressing code, hiding complexity in helpers,
 moving code elsewhere, weakening tests, or removing necessary validation and
 error handling. Existing conventions matter more than personal style.
 
-## Discuss and simplify
+## Parallel review and simplification
 
-Use [sol-loop](../sol-loop/SKILL.md) with one read-only Sol reviewer and its
-three-round budget, delegation, and availability rules. Add the user's goal,
-the relevant repository patterns, and the criteria above to the review brief.
-Ask for concrete smaller alternatives and what behavior or coverage each must
-preserve. Useful simplifications within this change are in scope, even when
-they are not correctness bugs; do not automatically dismiss them as nits.
-Do not invoke council unless the user explicitly chooses it instead.
+Optimize elapsed time even at higher token cost. Launch multiple independent,
+read-only agents concurrently, within the harness's concurrency limit:
 
-Evaluate each suggestion yourself. Apply the smallest justified simplification;
-challenge suggestions that obscure intent, lose coverage, or expand scope.
-Use the next review round for unresolved substantive tradeoffs and changes
-that need verification, following sol-loop's rules. Do not edit while the
-reviewer is running. If no Sol route is available, report that limitation;
-do not claim an independent review or silently substitute another model.
+- Code structure: unnecessary abstractions, branches, and duplication.
+- Tests: redundant setup and cases, preserving meaningful regression protection.
+- Repository fit: existing patterns and reusable implementations nearby.
 
-Run checks appropriate to the changed behavior and tests. Confirm the result
-still meets the original task, then compare it with the same base. A smaller
-diff is a preference, not a quota: keep necessary code and tests. Stop when
-there are no worthwhile simplifications left or the review budget is exhausted;
-report unresolved disagreements rather than forcing agreement.
+For larger diffs, divide independent modules among additional agents as capacity
+allows. Give each agent the checkout, fixed base, paths, user intent, constraints,
+and current check results. Ask for concrete smaller alternatives, file/line
+references, and the behavior or coverage to preserve. Agents must not edit,
+publish, or start more agents. Use the current model by default; honor any
+explicit model choice and the harness's delegation rules. If no model was
+specified and agents are unavailable, report that limitation and perform the
+same passes yourself; do not claim independent review. If a requested model
+is unavailable, report it and ask how to proceed rather than substituting a
+model or a self-review.
 
-Report what was simplified, what was deliberately retained and why, checks,
-review outcome, and diff size before/after. This skill alone does not authorize
-committing, pushing, opening a PR, changing draft status, or merging.
+Keep the reviewed files stable until the agents finish. Evaluate and deduplicate
+their findings, then apply justified changes yourself. Challenge proposals that
+obscure intent, weaken coverage, or expand scope. Run checks appropriate to the
+changed behavior and tests. Request a focused independent re-check only for
+substantive unresolved questions or risky edits; do not repeat clean reviews
+or start new rounds for wording and formatting. Stop when no worthwhile
+simplifications remain; report persistent disagreements instead of looping.
+
+Confirm the original task still works and compare against the fixed base. A
+smaller diff is a preference, not a quota. Report simplifications, deliberately
+retained complexity, checks, review limitations, and diff size before/after.
+This skill alone does not authorize committing, pushing, opening a PR, changing
+draft status, or merging.

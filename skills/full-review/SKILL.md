@@ -42,10 +42,11 @@ Check correctness, regressions, and integration with surrounding code. Inspect
 checks and merge conflicts against the target branch; report conflicts rather
 than rebasing or fixing someone else's PR.
 
-Apply the "Scope and candidates" review criteria from
-[simplify](../simplify/SKILL.md), without its scope-selection, editing, or
-delegation workflow. Give concrete smaller alternatives for worthwhile
-simplifications.
+Look for unnecessary abstractions, branches, speculative handling, duplicate
+test setup, and comments that repeat code. Prefer existing repository patterns
+and local solutions. Give concrete smaller alternatives while preserving
+behavior, meaningful assertions, validation, and error handling. Do not reward
+line-count reductions that hide complexity or suggest unrelated refactors.
 
 Verify each finding against the code or observed behavior, and avoid repeating
 already resolved feedback. Distinguish pre-existing failures from regressions
