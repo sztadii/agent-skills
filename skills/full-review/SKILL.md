@@ -1,6 +1,7 @@
 ---
 name: full-review
-description: Trigger this if the user says 'full review'.
+description: Trigger this if the user says 'full-review' or 'full review', or another skill invokes it.
+disable-model-invocation: true
 ---
 
 # Full Review

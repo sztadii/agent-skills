@@ -2,3 +2,5 @@ interface:
   display_name: "Proof"
   short_description: "Verify changed behavior with local evidence"
   default_prompt: "Use $proof to verify the changed behavior locally."
+policy:
+  allow_implicit_invocation: false

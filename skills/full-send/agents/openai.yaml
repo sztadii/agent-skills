@@ -2,3 +2,5 @@ interface:
   display_name: "Full Send"
   short_description: "Verify, get your pre-PR review, then ship with Jira"
   default_prompt: "Use $full-send to complete this task, show me the verified changes before creating a PR, and track linked Jira milestones through merge."
+policy:
+  allow_implicit_invocation: false

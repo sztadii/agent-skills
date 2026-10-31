@@ -1,6 +1,7 @@
 ---
 name: council
-description: Trigger this if the user says 'council'.
+description: Trigger this if the user says 'council', or another skill invokes it.
+disable-model-invocation: true
 ---
 
 # Council

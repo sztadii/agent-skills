@@ -12,6 +12,13 @@ To install just one skill, for example `full-review`, run:
 npx skills add sztadii/agent-skills -g --skill full-review
 ```
 
+## Invoking skills by name
+
+Invoke a skill by name, such as `simplify` or `full review`, or use the
+agent's explicit skill command, such as `$simplify`. Another skill can also
+invoke it as part of its workflow. Skills are configured for explicit invocation;
+when calling another skill, load its `SKILL.md` and follow its instructions.
+
 ## Usage examples
 
 ### 1. Fix a small bug and verify it — `proof`

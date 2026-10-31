@@ -1,6 +1,7 @@
 ---
 name: leaving-pr-comments
-description: Use whenever leaving comments on GitHub.
+description: Trigger this if the user says 'leaving-pr-comments' or 'leaving pr comments', or another skill invokes it.
+disable-model-invocation: true
 ---
 
 # Leaving PR Comments

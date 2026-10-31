@@ -1,6 +1,7 @@
 ---
 name: file-pr
-description: File a concise pull request. Use when the user asks to file, open, or create a PR.
+description: Trigger this if the user says 'file-pr' or 'file pr', or another skill invokes it.
+disable-model-invocation: true
 ---
 
 # File PR

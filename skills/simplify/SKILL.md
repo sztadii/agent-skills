@@ -1,12 +1,13 @@
 ---
 name: simplify
-description: Trigger this if the user says 'simplify'.
+description: Trigger this if the user says 'simplify', or another skill invokes it.
 disable-model-invocation: true
 ---
 
 # Simplify
 
-Run only on the user's explicit request. Prefer the smaller, more consistent
+Run when explicitly requested by the user or invoked by another skill.
+Prefer the smaller, more consistent
 PR when behavior, correctness, and readability are equally good. Leaving a
 well-scoped change untouched is a valid outcome.
 

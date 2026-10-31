@@ -1,6 +1,7 @@
 ---
 name: proof
-description: Use when the user asks for proof or another skill requires it.
+description: Trigger this if the user says 'proof', or another skill invokes it.
+disable-model-invocation: true
 ---
 
 # Proof

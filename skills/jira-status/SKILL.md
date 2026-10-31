@@ -1,12 +1,13 @@
 ---
 name: jira-status
-description: Assign the Jira issue to the user and track its status during implementation, PR review handoff, and merge when explicitly invoked or used by full-send for a linked task. Excludes reviewing someone else's PR.
+description: Trigger this if the user says 'jira-status' or 'jira status', or another skill invokes it.
+disable-model-invocation: true
 ---
 
 # Jira Status
 
 Activate when the user explicitly invokes `$jira-status` or names this skill,
-or when an explicit full-send request covers a task with a linked Jira issue.
+or when another skill invokes it for a task with a linked Jira issue.
 Keep it active for that task across follow-up turns; do not apply it to unrelated
 tasks. Preserve the issue key and verified milestone in handoff context. Never
 change Jira status when reviewing someone else's PR, even if this skill is mentioned.

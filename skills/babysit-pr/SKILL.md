@@ -1,6 +1,7 @@
 ---
 name: babysit-pr
-description: Monitor a pull request through review and CI. Use when the user asks to monitor, watch, or babysit a PR.
+description: Trigger this if the user says 'babysit-pr' or 'babysit pr', or another skill invokes it.
+disable-model-invocation: true
 ---
 
 # Babysit PR

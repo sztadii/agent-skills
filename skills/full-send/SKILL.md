@@ -1,6 +1,7 @@
 ---
 name: full-send
-description: Complete a task with proof, user review before PR creation, Jira milestone updates when linked, and merge once authorized gates pass. Use when the user says 'full send'.
+description: Trigger this if the user says 'full-send' or 'full send', or another skill invokes it.
+disable-model-invocation: true
 ---
 
 # Full Send
