@@ -1,0 +1,6 @@
+interface:
+  display_name: "Conversation Review"
+  short_description: "Suggest improvements from past agent conversations"
+  default_prompt: "$conversation-review"
+policy:
+  allow_implicit_invocation: false
