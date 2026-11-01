@@ -11,6 +11,7 @@ Code. Another skill can also explicitly invoke them.
 
 ## Skills
 
+- [conversation-review](conversation-review/SKILL.md) — Reviews previous agent conversations and proposes up to five concise improvements without making changes.
 - [full-send](full-send/SKILL.md) — Delivers a change from implementation through verification, independent review, PR publication and maintenance.
 - [full-review](full-review/SKILL.md) — Reviews a PR or diff and presents verified findings; PR comments require approval before publication.
 - [simplify](simplify/SKILL.md) — Simplifies the task's code while preserving behavior and useful test coverage.
@@ -21,6 +22,14 @@ Code. Another skill can also explicitly invoke them.
 - [leaving-pr-comments](leaving-pr-comments/SKILL.md) — Drafts or publishes concise, verified PR comments and replies.
 
 ## Examples: single skill
+
+> $conversation-review
+
+Runs the full review with no arguments: all accessible projects, at most the
+last seven days, skipping messages covered by an available previous review.
+Optional context can override the dates or projects, including a longer range:
+
+> $conversation-review Only the gdk-frontend project from the last week.
 
 > $full-send Prevent duplicate form submissions and deliver a verified draft PR.
 
