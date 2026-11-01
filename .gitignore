@@ -1,3 +1,20 @@
 .DS_Store
 **/.DS_Store
 .idea
+
+# Global skill installation artifacts in ~/.agents
+/.skill-lock.json
+/skills/babysit-pr/
+/skills/conversation-review/
+/skills/council/
+/skills/file-pr/
+/skills/find-improvements/
+/skills/full-review/
+/skills/full-send/
+/skills/kineti-fe-gdk-update/
+/skills/kineti-fe-types-sync/
+/skills/kineti-pending-tasks/
+/skills/kineti-pr-reminder/
+/skills/leaving-pr-comments/
+/skills/proof/
+/skills/simplify/
