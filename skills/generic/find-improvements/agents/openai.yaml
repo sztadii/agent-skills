@@ -1,0 +1,6 @@
+interface:
+  display_name: "Find Improvements"
+  short_description: "Find small bugs and worthwhile refactorings"
+  default_prompt: "$find-improvements"
+policy:
+  allow_implicit_invocation: false

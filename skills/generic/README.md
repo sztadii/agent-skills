@@ -11,6 +11,7 @@ Code. Another skill can also explicitly invoke them.
 
 ## Skills
 
+- [find-improvements](find-improvements/SKILL.md) — Analyzes current repository code and proposes two small bugs and two refactorings without making changes.
 - [conversation-review](conversation-review/SKILL.md) — Reviews previous agent conversations and proposes up to five concise improvements without making changes.
 - [full-send](full-send/SKILL.md) — Delivers a change from implementation through verification, independent review, PR publication and maintenance.
 - [full-review](full-review/SKILL.md) — Reviews a PR or diff and presents verified findings; PR comments require approval before publication.
@@ -22,6 +23,11 @@ Code. Another skill can also explicitly invoke them.
 - [leaving-pr-comments](leaving-pr-comments/SKILL.md) — Drafts or publishes concise, verified PR comments and replies.
 
 ## Examples: single skill
+
+> $find-improvements
+
+Analyzes the current repository for ten minutes and proposes two small bugs and
+two refactorings without making changes.
 
 > $conversation-review
 
