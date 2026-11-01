@@ -21,9 +21,13 @@ destination.
    are ready for review and still need it, checking reviews for the current
    revision. Skip drafts, closed or merged PRs, and PRs with required approvals,
    unless the user asks otherwise.
-3. Send one concise Slack message with each PR's title, repository and link.
-   Use Polish unless the team has established another language. If nothing
-   needs review, send nothing and report that result.
+3. Fetch each selected PR's `title`, `url`, `additions` and `deletions`
+   (for example, `gh pr view <URL> --json title,url,additions,deletions`).
+   These counts describe added and removed lines in the current PR diff.
+   Send one concise Slack message in English. Each entry contains only the PR
+   title, line counts (`100 added, 50 removed`) and link, as shown below.
+   Do not invent unavailable counts; report missing data. If nothing needs
+   review, send nothing and report that result.
 4. Report the number of included PRs and the sent message link, if available.
    Report missing access or incomplete data honestly. After an uncertain send,
    check channel history before retrying to avoid duplicates.
@@ -52,10 +56,10 @@ GitHub mapping still needs verification. Refresh mappings if accounts change.
 
 ## Example message
 
-Illustrative titles and links; replace them with actual PR data before sending.
+Illustrative titles, counts and links; replace them with current PR data.
 
-> Cześć! Moje PR-y czekają na review:
-> - [Fix duplicate form submissions](https://github.com/ORG/REPO/pull/123) — ORG/REPO
-> - [Improve validation messages](https://github.com/ORG/REPO/pull/124) — ORG/REPO
+> Hi! These PRs are ready for review:
+> - Fix duplicate form submissions — 100 added, 50 removed — https://github.com/ORG/REPO/pull/123
+> - Improve validation messages — 25 added, 10 removed — https://github.com/ORG/REPO/pull/124
 >
-> Dzięki za spojrzenie!
+> Thanks for taking a look!
