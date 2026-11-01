@@ -8,7 +8,7 @@ them.
 
 ## Skills
 
-- [kineti-pr-reminder](kineti-pr-reminder/SKILL.md) — Checks your open Kineti PRs and sends each teammate a Slack DM for PRs still awaiting their approval.
+- [kineti-pr-reminder](kineti-pr-reminder/SKILL.md) — Checks `sztadii`'s open PRs in `kineti1` and sends each teammate a Slack DM for PRs still awaiting their approval.
 
 ## Examples
 
