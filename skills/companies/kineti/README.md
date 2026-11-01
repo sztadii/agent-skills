@@ -10,22 +10,6 @@ them.
 
 - [kineti-pr-reminder](kineti-pr-reminder/SKILL.md) — Checks your open Kineti PRs and sends one Slack reminder for PRs that still need review.
 
-## Installation
-
-Install all skills, including generic, Kineti and other companies:
-
-```sh
-npx skills add sztadii/agent-skills -g --skill '*'
-```
-
-See the [main installation instructions](../../../README.md#installation).
-
-To install only the Kineti reminder instead:
-
-```sh
-npx skills add sztadii/agent-skills -g --skill kineti-pr-reminder
-```
-
 ## Examples
 
 Use an established repository scope and Slack channel:

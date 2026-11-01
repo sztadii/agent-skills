@@ -9,16 +9,6 @@ a skill for a specific task.
 Invoke skills explicitly with `$skill-name` in Codex or `/skill-name` in Claude
 Code. Another skill can also explicitly invoke them.
 
-## Installation
-
-Install all skills, including generic and company-specific workflows:
-
-```sh
-npx skills add sztadii/agent-skills -g --skill '*'
-```
-
-See the [main installation instructions](../../README.md#installation).
-
 ## Skills
 
 - [full-send](full-send/SKILL.md) — Delivers a change from implementation through verification, independent review, PR publication and maintenance.
