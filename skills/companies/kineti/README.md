@@ -21,7 +21,7 @@ Code. Another skill can also explicitly invoke them.
 Reminders are sent only as private Slack DMs. By default, each eligible teammate
 from the skill's team table receives a separate message.
 
-> $kineti-pr-reminder Wyślij tylko Michałowi.
+> $kineti-pr-reminder tylko Michałowi
 
 > $kineti-fe-gdk-update
 
@@ -29,4 +29,4 @@ from the skill's team table receives a separate message.
 
 > $kineti-pending-tasks
 
-> $kineti-pending-tasks Sprawdź pending taski Michała Grzeżułkowskiego.
+> $kineti-pending-tasks Michał Grzeżułkowski
