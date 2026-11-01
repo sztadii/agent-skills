@@ -6,56 +6,56 @@ description: "Trigger only when the user or another skill explicitly invokes thi
 # Kineti PR review reminders
 
 Run only when explicitly invoked with `$kineti-pr-reminder` (Codex),
-`/kineti-pr-reminder` (Claude Code), or an instruction from another skill.
-Mentions, examples and matching tasks alone do not trigger this workflow.
-Scheduled invocations must explicitly name this skill.
+`/kineti-pr-reminder` (Claude Code), or by another skill. Scheduled runs must
+explicitly name this skill. Editing it or mentioning it in an example does not
+invoke it. Invocation authorizes sending the reminder to the established Slack
+destination.
 
-On each invocation, check the user's current PRs and send the team a concise
-Slack reminder. Invoking this workflow authorizes sending the reminder; do not
-ask again for permission to send to the established destination. Creating or
-editing the skill does not invoke it.
+## Workflow
 
-## Establish context
+1. Identify the authenticated GitHub user (`gh api user --jq .login`). Determine
+   the Kineti repository scope and Slack destination from the invocation or
+   established project context. Ask for missing details; in unattended runs,
+   report the blocker without sending.
+2. Fetch the user's open PRs in that scope, including all pages. Select PRs that
+   are ready for review and still need it, checking reviews for the current
+   revision. Skip drafts, closed or merged PRs, and PRs with required approvals,
+   unless the user asks otherwise.
+3. Send one concise Slack message with each PR's title, repository and link.
+   Use Polish unless the team has established another language. If nothing
+   needs review, send nothing and report that result.
+4. Report the number of included PRs and the sent message link, if available.
+   Report missing access or incomplete data honestly. After an uncertain send,
+   check channel history before retrying to avoid duplicates.
 
-- Identify the user through the authenticated GitHub account (for example,
-  `gh api user --jq .login`), rather than guessing from local git configuration.
-- Determine the Kineti organization and repositories from the invocation,
-  project configuration or confirmed GitHub context. Keep the search within
-  that scope.
-- Determine the Slack workspace and channel from the instructions or an
-  unambiguous, previously established context. Use available read tools to
-  resolve the destination when helpful. If the repository scope or recipient
-  remains ambiguous, ask only for the missing information. In an automated run,
-  report the blocker without sending to an arbitrary channel.
+Use confirmed account mappings below when a reviewer needs to be identified.
+Mention people only when requested or consistent with established team practice;
+do not ping everyone in the table or use `@channel` / `@here`. Do not guess
+missing mappings. This workflow does not create or change schedules.
 
-## Check PRs
+## Kineti contacts
 
-1. Fetch open PRs authored by the authenticated user within the established
-   scope. Handle pagination.
-2. Check the current state, draft status, review decision, requested reviewers
-   and reviews for the current revision. Include PRs that are ready for review
-   and still need it. Skip drafts, closed or merged PRs, and PRs with the required
-   approvals, unless the user specifies a different scope.
-3. Collect each selected PR's title, number, repository and URL. Do not claim
-   that CI passed or someone is blocking progress unless the data supports it.
+Initial contact directory, not a confirmed roster of the user's team. Names and
+Slack details were read from Kineti Slack on 2026-11-01; GitHub mappings were
+checked against `kineti1` membership and profile names. `Unconfirmed` means the
+GitHub mapping still needs verification. Refresh mappings if accounts change.
 
-## Send the reminder
+| Name | GitHub ID (login) | Slack ID | Email |
+| --- | --- | --- | --- |
+| Adam Budziak | `adambudziak` | `U081WMVNDRV` | adam@kineti.nl |
+| Jakub Jurczak | `jakujur` | `U08GTSN023F` | jakub.j@kineti.nl |
+| Kacper | Unconfirmed | `U0C8AREURDH` | kacper@kineti.nl |
+| Konrad Świerczyński | `KonradSwierczynski` | `U08EQAE4T7Y` | konrad@kineti.nl |
+| Maciej Artymowicz-Olejnik | `macoley` | `U08DZSWLN6M` | maciej@kineti.nl |
+| Oleh Botsiun | `Boto1` | `U082BATBUF4` | oleh@kineti.nl |
+| Tonny Phan | `tonny-kineti` | `U014JEH4ZA4` | tonny@kineti.nl |
 
-- Send one short, consolidated message in Polish to the established Slack
-  channel: a request for review and a list of links with titles and repositories.
-  Adapt the message if the team uses a different established language.
-- Do not add `@channel`, `@here` or guessed user mentions. Mention reviewers only
-  with confirmed account mappings and an established team practice or user
-  instruction.
-- If no PR needs review, send no empty reminder; report the result in the reply.
-- If available channel history already contains an identical reminder from this
-  run, skip the duplicate. After an ambiguous send result, check history before
-  retrying; do not resend blindly.
-- Use an available Slack tool to send the message. Report missing access as a
-  blocker rather than presenting a draft as a sent message.
-- Finish with the number of included PRs and a link to the sent message if the
-  tool returned one. Clearly report omissions or incomplete data that limited
-  the result.
+## Example message
 
-This skill performs one check and send per invocation. Creating or changing
-schedules requires a separate user instruction.
+Illustrative titles and links; replace them with actual PR data before sending.
+
+> Cześć! Moje PR-y czekają na review:
+> - [Fix duplicate form submissions](https://github.com/ORG/REPO/pull/123) — ORG/REPO
+> - [Improve validation messages](https://github.com/ORG/REPO/pull/124) — ORG/REPO
+>
+> Dzięki za spojrzenie!
