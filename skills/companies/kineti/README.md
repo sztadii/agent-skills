@@ -30,12 +30,12 @@ npx skills add sztadii/agent-skills -g --skill kineti-pr-reminder
 
 Use an established repository scope and Slack channel:
 
-> $kineti-pr-reminder Sprawdź moje aktualne PR-y Kineti i wyślij zespołowi przypomnienie o review na ustalonym kanale Slack.
+> $kineti-pr-reminder Check my current Kineti PRs and send the team a review reminder in the established Slack channel.
 
 Provide the repository scope and destination explicitly when needed (replace the
 placeholders with actual values):
 
-> $kineti-pr-reminder Sprawdź moje PR-y w repozytorium <organizacja>/<repozytorium> i wyślij przypomnienie na kanał Slack <ID-kanału>.
+> $kineti-pr-reminder Check my PRs in <organization>/<repository> and send a reminder to Slack channel <channel-ID>.
 
 Invoking the skill authorizes sending the reminder. It skips drafts and PRs that
 already have the required approvals, and sends nothing if no PR needs review.

@@ -1,7 +1,7 @@
 interface:
   display_name: "Kineti PR Reminder"
-  short_description: "Przypomnienia na Slacku o PR-ach Kineti do review"
-  default_prompt: "Użyj $kineti-pr-reminder, sprawdź moje aktualne PR-y Kineti i wyślij zespołowi przypomnienie o review na Slacku."
+  short_description: "Slack reminders for Kineti PRs awaiting review"
+  default_prompt: "Use $kineti-pr-reminder to check my current Kineti PRs and send the team a Slack review reminder."
 
 policy:
   allow_implicit_invocation: false
