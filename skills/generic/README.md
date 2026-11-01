@@ -11,6 +11,7 @@ Code. Another skill can also explicitly invoke them.
 
 ## Skills
 
+- [find-improvements](find-improvements/SKILL.md) — Analyzes current repository code and proposes two small bugs and two refactorings in Polish, without making changes.
 - [conversation-review](conversation-review/SKILL.md) — Reviews previous agent conversations and proposes up to five concise improvements without making changes.
 - [full-send](full-send/SKILL.md) — Delivers a change from implementation through verification, independent review, PR publication and maintenance.
 - [full-review](full-review/SKILL.md) — Reviews a PR or diff and presents verified findings; PR comments require approval before publication.
@@ -22,6 +23,20 @@ Code. Another skill can also explicitly invoke them.
 - [leaving-pr-comments](leaving-pr-comments/SKILL.md) — Drafts or publishes concise, verified PR comments and replies.
 
 ## Examples: single skill
+
+> $find-improvements
+
+Spends ten minutes actively analyzing the current repository, starting with recent
+commits. Returns verified proposals with code locations and estimated change
+sizes: two bugs (30–60 implementation lines each) and two refactorings (up to
+about 200 lines each), or fewer when evidence is insufficient. Makes no changes.
+Optional context can select another repository or narrow the focus:
+
+> $find-improvements Analyze gdk-frontend, focusing on forms and request state.
+
+For a scheduled task bound to the target project, use the same explicit prompt:
+
+> Run $find-improvements for the current repository.
 
 > $conversation-review
 
