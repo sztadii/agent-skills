@@ -15,7 +15,7 @@ select another repository or narrow the focus. Start with these defaults without
 asking for parameters. If the selected repository is unavailable or ambiguous,
 report the missing context rather than analyzing an unrelated repository.
 
-Prepare proposals for the user's decision, in Polish: two small behavioral bugs
+Prepare proposals for the user's decision: two small behavioral bugs
 and two refactorings. This is a read-only analysis: do not edit repository files,
 change checkout, implement fixes, create commits, PRs or tickets, or change
 schedules. Implementation is a separate task selected by the user. Do not start
@@ -73,7 +73,7 @@ findings. Keep the categories distinct and rank each by value relative to effort
 
 ## Report
 
-Respond in Polish in the current conversation. Start with a short scope line:
+Respond in the current conversation. Start with a short scope line:
 repository, branch, reviewed HEAD SHA, commit range, elapsed analysis time and
 material coverage or verification limitations. Include the SHA so a later run
 can reuse it without writing state files. Do not imply complete repository
