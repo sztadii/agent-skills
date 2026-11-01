@@ -26,17 +26,8 @@ Code. Another skill can also explicitly invoke them.
 
 > $find-improvements
 
-Spends ten minutes actively analyzing the current repository, starting with recent
-commits. Returns verified proposals with code locations and estimated change
-sizes: two bugs (30–60 implementation lines each) and two refactorings (up to
-about 200 lines each), or fewer when evidence is insufficient. Makes no changes.
-Optional context can select another repository or narrow the focus:
-
-> $find-improvements Analyze gdk-frontend, focusing on forms and request state.
-
-For a scheduled task bound to the target project, use the same explicit prompt:
-
-> Run $find-improvements for the current repository.
+Analyzes the current repository for ten minutes and proposes two small bugs and
+two refactorings without making changes.
 
 > $conversation-review
 
