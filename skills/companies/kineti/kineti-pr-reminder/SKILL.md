@@ -52,6 +52,6 @@ changes the recipient scope.
 
 Illustrative titles, counts and links; replace them with current PR data.
 
-> Hi! These PRs are ready for review:
+> These PRs are ready for review:
 > - Fix duplicate form submissions — 100 added, 50 removed — https://github.com/kineti1/REPO/pull/123
 > - Improve validation messages — 25 added, 10 removed — https://github.com/kineti1/REPO/pull/124
