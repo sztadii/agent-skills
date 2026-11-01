@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Send"
+  short_description: "Deliver a feature through a verified PR"
+  default_prompt: "Use $full-send to implement this task, verify and review it, publish through $file-pr and maintain the PR through $babysit-pr until the requested endpoint is reached."
+policy:
+  allow_implicit_invocation: false

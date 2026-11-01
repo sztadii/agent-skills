@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Review"
+  short_description: "Review changes and present findings before publication"
+  default_prompt: "Use $full-review to review this PR and show me verified findings and proposed comments. Wait for my approval before publishing, then follow up on approved review threads."
+policy:
+  allow_implicit_invocation: false

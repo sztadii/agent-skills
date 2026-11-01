@@ -1,0 +1,6 @@
+interface:
+  display_name: "Council"
+  short_description: "Simplify code before independent agent review"
+  default_prompt: "Use $council to simplify this code change before independent review, then return the reviewed snapshot, preparation diff, evidence-backed findings and a verdict."
+policy:
+  allow_implicit_invocation: false
