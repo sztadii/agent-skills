@@ -1,0 +1,7 @@
+interface:
+  display_name: "Kineti PR Reminder"
+  short_description: "Przypomnienia na Slacku o PR-ach Kineti do review"
+  default_prompt: "Użyj $kineti-pr-reminder, sprawdź moje aktualne PR-y Kineti i wyślij zespołowi przypomnienie o review na Slacku."
+
+policy:
+  allow_implicit_invocation: false
