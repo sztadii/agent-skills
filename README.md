@@ -13,11 +13,11 @@ to call each other.
 
 ## Installation
 
-Install every skill with one command — generic, Kineti and any other companies
-added to this repository:
+Install every skill for Codex and Claude Code with one command — generic, Kineti
+and any other companies added to this repository:
 
 ```sh
-npx skills add sztadii/agent-skills -g --skill '*'
+npx skills add sztadii/agent-skills -g --skill '*' --agent codex claude-code
 ```
 
 The installer discovers skills in nested directories. The folder split is only
