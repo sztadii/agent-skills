@@ -76,13 +76,22 @@ actual blocker without printing secrets.
 
 ## Completion checks
 
-Read the current `.github/workflows/` and repository scripts so local verification
-covers the checks a later PR will run. Include uncommitted files in the check scope;
-do not use a committed-head-only affected range that misses this skill's changes.
-At minimum, run:
+Read the current `.github/workflows/` and repository scripts to identify the
+non-E2E checks required for a later PR. Run full typecheck and the complete
+non-watch CI unit test suite; run other checks only where required by PR CI.
+Include uncommitted files in the check scope; do not use a committed-head-only
+affected range that misses this skill's changes.
+Do not run E2E or browser/UI test suites (including Playwright or Cypress),
+even when repository instructions or CI mention them. Inspect aggregate scripts
+and Nx targets before running them; use separate non-E2E targets if a wrapper
+would also launch E2E. Do not trigger remote E2E jobs or rerun E2E workflows.
+Report E2E as intentionally not run under this workflow; do not treat its omission
+as a blocker or claim that E2E passed. Do not disable or modify CI checks.
+
+Use these project checks within that scope:
 
 - Lint, full TypeScript checks (including mocks and Angular templates), formatting
-  checks and the complete non-watch CI test suite using the repository scripts.
+  checks and the complete non-watch CI unit test suite using the repository scripts.
   Discover their exact names and non-watch options in the selected project;
   drones-frontend currently uses `lint`, `typecheck`, `format-check-all` and
   `test-ci`. Do not assume these names exist in every frontend.
@@ -92,9 +101,9 @@ At minimum, run:
   After completing translations, rerun the
   pipeline and confirm it introduces no further locale changes relative to the
   prepared local result; the intended changes remain uncommitted.
-- The application production build, including supported locales, and relevant
-  UI/e2e tests for affected behavior. Use existing project targets and local
-  equivalents of CI build steps; do not publish images or deploy anything.
+- The application production build, including supported locales, only if required
+  by PR CI. Use existing project targets and local equivalents of CI build steps;
+  do not publish images or deploy anything.
 
 Use `NX_SKIP_NX_CACHE=true NX_NO_CLOUD=true` for Nx checks so cached results cannot
 hide incompatibilities. If an earlier stage prevents later typecheck stages from

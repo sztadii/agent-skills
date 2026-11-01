@@ -71,16 +71,24 @@ stage prevents later stages from running, run the remaining stages separately
 to collect the full result. Inspect contract changes against the schemas and
 backend implementation before adapting affected code, mocks and tests. Account
 for nullability, required fields, enum values, request/response shapes and runtime
-semantics, not only compilation. Follow the selected repository's testing policy.
+semantics, not only compilation. Apply the verification scope below when following
+the selected repository's testing policy.
 Update translations using its existing workflow if adaptations change visible text.
 
 Do not use `any`, unjustified casts, weakened types, disabled checks or removed
 assertions to hide incompatibilities. Fix upgrade-related failures and rerun the
 affected checks. Do not edit backend sources to make the frontend pass.
 
-Before calling the result ready, run full typecheck, lint, formatting, the complete
-non-watch CI unit test suite, applicable build targets and any translation or
-UI/e2e checks required by the changed behavior and repository instructions.
+Before calling the result ready, run full typecheck and the complete non-watch
+CI unit test suite. Run lint, formatting, translation checks and build targets only
+where required by the selected frontend's PR CI checks. Do not expand verification
+to additional suites solely because behavior changed.
+Do not run E2E or browser/UI test suites (including Playwright or Cypress),
+even when repository instructions or CI mention them. Inspect aggregate scripts
+and Nx targets before running them; use separate non-E2E targets if a wrapper
+would also launch E2E. Do not trigger remote E2E jobs or rerun E2E workflows.
+Report E2E as intentionally not run under this workflow; do not treat its omission
+as a blocker or claim that E2E passed. Do not disable or modify CI checks.
 Discover exact commands per project: drones-frontend uses `test-ci`, whereas
 gdk-frontend uses `test:ci`. Include uncommitted changes in affected check scopes;
 a committed-head-only range may miss this update. Disable Nx cache/cloud for
