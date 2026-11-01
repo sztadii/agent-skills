@@ -1,0 +1,7 @@
+interface:
+  display_name: "Kineti FE Types Sync"
+  short_description: "Regenerate BE types and adapt a Kineti frontend"
+  default_prompt: "Use $kineti-fe-types-sync to regenerate backend contract types in the current Kineti frontend, adapt code and mocks, and verify the local changes."
+
+policy:
+  allow_implicit_invocation: false

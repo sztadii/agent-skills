@@ -1,0 +1,7 @@
+interface:
+  display_name: "Kineti Pending Tasks"
+  short_description: "List assigned Kineti tasks awaiting fixes or review"
+  default_prompt: "Use $kineti-pending-tasks to list my assigned Kineti Jira issues in pending, fix or review statuses."
+
+policy:
+  allow_implicit_invocation: false

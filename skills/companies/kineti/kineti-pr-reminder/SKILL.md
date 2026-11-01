@@ -9,7 +9,8 @@ Personal workflow for GitHub author `sztadii` in organization `kineti1`.
 Run only when explicitly invoked as `$kineti-pr-reminder` (Codex),
 `/kineti-pr-reminder` (Claude Code), or by another skill, including scheduled
 invocations. Invocation authorizes sending Slack DMs to everyone in the team
-table by default. Use a different recipient scope only when the user explicitly
+table by default. Send reminders only as private, one-to-one Slack DMs, never
+to shared channels. Use a different set of people only when the user explicitly
 requests it; no recipient list is needed when invoking the skill.
 
 ## Workflow
