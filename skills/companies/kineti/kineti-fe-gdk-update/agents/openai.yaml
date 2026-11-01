@@ -1,0 +1,7 @@
+interface:
+  display_name: "Kineti FE GDK Update"
+  short_description: "Update GDK in a Kineti frontend and verify adaptations"
+  default_prompt: "Use $kineti-fe-gdk-update to update @geodome/gdk in the current Kineti frontend consumer project to the latest stable version and verify the changes."
+
+policy:
+  allow_implicit_invocation: false
