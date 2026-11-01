@@ -25,11 +25,12 @@ requests it; no recipient list is needed when invoking the skill.
    **their own valid approval**. Use GitHub's approval state: a push does not
    invalidate an approval unless GitHub does so. Other people's approvals and
    the requested-reviewer list do not restrict this selection.
-3. Recheck eligibility before sending. Fetch each PR's `title`, `url`,
+3. Recheck eligibility before sending. Fetch each PR's `url`,
    `additions` and `deletions` (e.g. `gh pr view <URL> --json
-   title,url,additions,deletions`). Send one English DM per nonempty recipient
-   list, using the format below. Use the listed DM IDs directly; do not guess
-   identities or invent missing data. Resolve any user-requested recipient
+   url,additions,deletions`). Send one English DM per nonempty recipient
+   list, using the format below. Each PR entry must contain only its URL and
+   added/removed line counts; omit PR titles. Use the listed DM IDs directly;
+   do not guess identities or invent missing data. Resolve any user-requested recipient
    outside the table before sending. Do not retry an uncertain
    send.
 4. Report message links and PR counts, or reasons for skipping. Do not change
@@ -51,8 +52,8 @@ changes the recipient scope.
 
 ## Example message
 
-Illustrative titles, counts and links; replace them with current PR data.
+Illustrative links and counts; replace them with current PR data.
 
 > These PRs are ready for review:
-> - Fix duplicate form submissions — 100 added, 50 removed — https://github.com/kineti1/REPO/pull/123
-> - Improve validation messages — 25 added, 10 removed — https://github.com/kineti1/REPO/pull/124
+> - https://github.com/kineti1/REPO/pull/123 — 100 added, 50 removed
+> - https://github.com/kineti1/REPO/pull/124 — 25 added, 10 removed
