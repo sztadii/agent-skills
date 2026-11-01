@@ -8,23 +8,17 @@ them.
 
 ## Skills
 
-- [kineti-pr-reminder](kineti-pr-reminder/SKILL.md) — Checks your open Kineti PRs and sends one Slack reminder for PRs that still need review.
+- [kineti-pr-reminder](kineti-pr-reminder/SKILL.md) — Checks your open Kineti PRs and sends each teammate a Slack DM for PRs still awaiting their approval.
 
 ## Examples
 
-Use an established repository scope and Slack channel:
+> $kineti-pr-reminder Check my current Kineti PRs and send review reminders to Oleh, Michał G and Jakub.
 
-> $kineti-pr-reminder Check my current Kineti PRs and send the team a review reminder in the established Slack channel.
-
-Provide the repository scope and destination explicitly when needed (replace the
-placeholders with actual values):
-
-> $kineti-pr-reminder Check my PRs in <organization>/<repository> and send a reminder to Slack channel <channel-ID>.
-
-Invoking the skill authorizes sending the reminder. It skips drafts and PRs that
-already have the required approvals, and sends nothing if no PR needs review.
-GitHub and Slack access are required; an ambiguous repository scope or channel
-must be resolved before sending.
+Invoking the skill authorizes sending reminders to the configured Slack DMs.
+Each teammate receives their own list of fully ready PRs without their valid
+approval, only on their working days in `Europe/Warsaw`. Drafts, unresolved
+review threads, merge conflicts, and pending or failed CI prevent a reminder.
+No message is sent for an empty list. GitHub and Slack access are required.
 
 The skill performs one check per invocation. Scheduling it requires a separate
 request that explicitly names `$kineti-pr-reminder`.

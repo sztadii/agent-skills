@@ -13,46 +13,47 @@ destination.
 
 ## Workflow
 
-1. Identify the authenticated GitHub user (`gh api user --jq .login`). Determine
-   the Kineti repository scope and Slack destination from the invocation or
-   established project context. Ask for missing details; in unattended runs,
-   report the blocker without sending.
-2. Fetch the user's open PRs in that scope, including all pages. Select PRs that
-   are ready for review and still need it, checking reviews for the current
-   revision. Skip drafts, closed or merged PRs, and PRs with required approvals,
-   unless the user asks otherwise.
-3. Fetch each selected PR's `title`, `url`, `additions` and `deletions`
-   (for example, `gh pr view <URL> --json title,url,additions,deletions`).
-   These counts describe added and removed lines in the current PR diff.
-   Send one concise Slack message in English. Each entry contains only the PR
-   title, line counts (`100 added, 50 removed`) and link, as shown below.
-   Do not invent unavailable counts; report missing data. If nothing needs
-   review, send nothing and report that result.
-4. Report the number of included PRs and the sent message link, if available.
-   Report missing access or incomplete data honestly. After an uncertain send,
-   check channel history before retrying to avoid duplicates.
+1. Identify the authenticated GitHub user (`gh api user --jq .login`). Fetch all
+   their open, non-draft PRs across the `kineti1` organization, including new
+   repositories and all result pages.
+2. Keep only fully ready PRs: current-head checks and commit statuses have no
+   pending or failed results, all review threads are resolved, and there are no
+   merge conflicts. Skipped or neutral checks and no configured checks are fine;
+   failed data retrieval is not evidence of no checks. `Changes requested` alone
+   is not an extra blocker. Skip PRs whose readiness cannot be verified and
+   report why.
+3. Build a separate list for each teammate below, excluding PRs where that
+   teammate already has a valid approval. Follow GitHub's current approval state
+   and repository rules: an approval remains valid after a push unless GitHub
+   invalidates it. Another person's approval does not remove the PR from this
+   teammate's list. Requested reviewers do not restrict recipients.
+4. Check today's weekday in `Europe/Warsaw` and skip teammates outside their
+   working days. Recheck PR readiness and approvals immediately before sending.
+   Fetch `title`, `url`, `additions` and `deletions` for each selected PR
+   (for example, `gh pr view <URL> --json title,url,additions,deletions`). Counts
+   describe added and removed lines in the current PR diff; do not invent them.
+5. Send at most one English message per teammate to their listed Slack DM, only
+   if their list is nonempty. Each entry contains only the PR title, line counts
+   (`100 added, 50 removed`) and link. Do not add mentions or broadcast pings.
+   Report missing data or access as a blocker. Do not retry an uncertain send.
+6. Report sent messages with links and PR counts, or reasons for skipping.
+   Do not change PRs or reviews. A still-eligible PR may appear again in the next
+   scheduled run even without new changes. Do not catch up missed runs or create
+   extra sends or schedules; the two existing daily runs are intentional.
 
-Use confirmed account mappings below when a reviewer needs to be identified.
-Mention people only when requested or consistent with established team practice;
-do not ping everyone in the table or use `@channel` / `@here`. Do not guess
-missing mappings. This workflow does not create or change schedules.
+## Team
 
-## Kineti contacts
+These are the only recipients. GitHub-to-DM mappings and working days come from
+user-provided configuration in the existing PR reminder schedulers, checked on
+2026-11-01. Slack user IDs and emails come from Kineti Slack. Use the listed DM
+conversation IDs directly without rediscovering identities. Working days use
+`Europe/Warsaw`.
 
-Initial contact directory, not a confirmed roster of the user's team. Names and
-Slack details were read from Kineti Slack on 2026-11-01; GitHub mappings were
-checked against `kineti1` membership and profile names. `Unconfirmed` means the
-GitHub mapping still needs verification. Refresh mappings if accounts change.
-
-| Name | GitHub ID (login) | Slack ID | Email |
-| --- | --- | --- | --- |
-| Adam Budziak | `adambudziak` | `U081WMVNDRV` | adam@kineti.nl |
-| Jakub Jurczak | `jakujur` | `U08GTSN023F` | jakub.j@kineti.nl |
-| Kacper | Unconfirmed | `U0C8AREURDH` | kacper@kineti.nl |
-| Konrad Świerczyński | `KonradSwierczynski` | `U08EQAE4T7Y` | konrad@kineti.nl |
-| Maciej Artymowicz-Olejnik | `macoley` | `U08DZSWLN6M` | maciej@kineti.nl |
-| Oleh Botsiun | `Boto1` | `U082BATBUF4` | oleh@kineti.nl |
-| Tonny Phan | `tonny-kineti` | `U014JEH4ZA4` | tonny@kineti.nl |
+| Name | GitHub ID (login) | Slack user ID | Email | Slack DM | Working days |
+| --- | --- | --- | --- | --- | --- |
+| Oleh Botsiun | `Boto1` | `U082BATBUF4` | oleh@kineti.nl | `D08FRL221RB` | Monday–Friday |
+| Michał Grzeżułkowski | `michalg-kineti` | `U08CFEQBYSX` | michal.g@kineti.nl | `D08FRUSPBHB` | Monday–Friday |
+| Jakub | `jakubwkineti` | `U09GBBXTHHT` | jakub.w@kineti.nl | `D08G9H6N15H` | Tuesday–Thursday |
 
 ## Example message
 
