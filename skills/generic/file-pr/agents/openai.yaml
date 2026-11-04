@@ -1,0 +1,6 @@
+interface:
+  display_name: "File PR"
+  short_description: "Create or update a PR from prepared changes"
+  default_prompt: "Use $file-pr to verify and publish prepared task changes, creating a new draft PR or updating the matching PR while preserving its current status."
+policy:
+  allow_implicit_invocation: false

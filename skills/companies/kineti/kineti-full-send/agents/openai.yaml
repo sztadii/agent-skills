@@ -1,0 +1,6 @@
+interface:
+  display_name: "Kineti Full Send"
+  short_description: "Deliver with MSW verification and a PR recording"
+  default_prompt: "Use $kineti-full-send to deliver this task through $full-send with MSW-only verification and a working scenario recording in the PR."
+policy:
+  allow_implicit_invocation: false

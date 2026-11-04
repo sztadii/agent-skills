@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Send"
+  short_description: "Deliver a task through verification and PR maintenance"
+  default_prompt: "Use $full-send to implement this task, verify and review it, publish through $file-pr and hand off PR maintenance to $babysit-pr with my constraints."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Commit and Push"
+  short_description: "Commit or push with hooks and final-output verification"
+  default_prompt: "Use $commit-push to commit prepared task changes, push existing commits, or both, respecting the requested scope."
+policy:
+  allow_implicit_invocation: true

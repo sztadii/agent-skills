@@ -1,0 +1,9 @@
+.DS_Store
+**/.DS_Store
+.idea
+
+# Global skill installation artifacts in ~/.agents
+/.skill-lock.json
+/skills/*/
+!/skills/generic/
+!/skills/companies/

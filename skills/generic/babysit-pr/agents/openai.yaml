@@ -1,0 +1,6 @@
+interface:
+  display_name: "Babysit PR"
+  short_description: "Maintain and merge PRs"
+  default_prompt: "Use $babysit-pr to maintain this PR through its default endpoint unless I specify a narrower one."
+policy:
+  allow_implicit_invocation: false
