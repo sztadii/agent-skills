@@ -13,12 +13,19 @@ publish; start no agents other than the Analysts below.
 Give each category this task, with the questions an Analyst must answer for
 this PR:
 
-1. Critical bugs: which changes cause incorrect behavior, regressions, crashes,
-   data loss, security holes or broken public contracts? Under which inputs or
-   states do they fail?
-2. Duplication: which new code repeats an existing helper, component, service,
-   pattern, standard library feature or installed dependency, or repeats other
-   code within the PR, without need? How would it reuse what exists?
+1. Critical bugs: which added or changed lines cause incorrect behavior,
+   regressions, crashes, data loss, security holes or broken public contracts?
+   Under which inputs or states do they fail? Bugs that already exist on the
+   base and that the PR does not trigger more often or make worse are out of
+   scope.
+2. Duplication: does similar code already exist in the codebase or within the
+   PR (a helper, component, service, pattern, standard library feature or
+   installed dependency), and could the new code easily reuse or extend it?
+   Recommend reuse only when it pays off: the existing solution is generic
+   enough to fit without contortions, or both pieces model the same entity or
+   concept and would otherwise drift apart. Skip similarities that are
+   coincidental, would need a disproportionate refactor or would couple
+   unrelated areas.
 3. Project rules: where does the PR contradict repository instructions,
    documented conventions or patterns the surrounding code consistently
    follows (structure, naming, error handling, testing, APIs)?
@@ -55,7 +62,9 @@ this PR:
 
 - Check each finding against the code at the head SHA; drop speculative or
   unsubstantiated ones, style preferences the repository does not require and
-  issues the PR did not introduce or worsen.
+  issues the PR did not introduce or worsen. Pre-existing bugs never block the
+  PR. Keep a duplication finding only if it names the existing code and reuse
+  is clearly worth its cost.
 - Merge duplicates across Analysts and categories. Weigh agreement between the
   two Analysts of a category; investigate disagreements only when they decide
   whether a finding stands. Do not count votes.
