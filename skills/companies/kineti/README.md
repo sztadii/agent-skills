@@ -2,11 +2,6 @@
 
 [Back to main README](../../../README.md)
 
-Company-specific workflows for Kineti PR reviews, pending Jira tasks, dependency updates and backend contract updates.
-
-Invoke skills explicitly with `$skill-name` in Codex or `/skill-name` in Claude
-Code. Only a human invokes them; other skills do not.
-
 ## Skills
 
 - [kineti-pr-reminder](kineti-pr-reminder/SKILL.md) — Sends private Slack DMs requesting Kineti PR reviews.
@@ -14,7 +9,7 @@ Code. Only a human invokes them; other skills do not.
 - [kineti-fe-gdk-update](kineti-fe-gdk-update/SKILL.md) — Updates `@geodome/gdk` in a Kineti frontend consumer project, including required code and translation adaptations and verification. Leaves uncommitted changes for review.
 - [kineti-fe-types-sync](kineti-fe-types-sync/SKILL.md) — Regenerates backend types in `drones-frontend` or `gdk-frontend`, adapts code and mocks, and verifies the local changes. Leaves uncommitted changes for review.
 
-## Examples: single skill
+## Examples
 
 > $kineti-pr-reminder
 
