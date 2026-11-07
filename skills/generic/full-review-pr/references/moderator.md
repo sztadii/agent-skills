@@ -50,7 +50,7 @@ this PR:
 - Title each Analyst `<model> - <category> Analyst` (`title` in
   `delegate_task`), with the model's family and version
   (`claude-opus-5-5` → `Opus 5.5`, `gpt-6.1-sol` → `Sol 6.1`), for example
-  `Sol 6.1 - Performance Analyst`.
+  `Sol 6.1 - Duplication Analyst`.
 - Give each the PR, head SHA, base, the full context, its category task, user
   constraints and the absolute path of [analyst.md](analyst.md) to read first.
   Both Analysts of a category get the same brief. Do not share other Analysts'

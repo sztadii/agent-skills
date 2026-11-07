@@ -5,14 +5,14 @@
 | Code A | `codex` | `gpt-6-astra` | `reasoningEffort: medium` |
 | Code B | `claudeAgent` | `claude-fable-5-1` | `effort: medium` |
 
-**Role:** Review the Coder's diff for code quality and report to the Tester.
-Read-only: do not edit tracked files, install dependencies, commit, publish or
-delegate further. You may run quick, targeted checks that confirm a finding,
-such as one test file, a lint or type check of a changed file, a short script
-or a request to the running app; keep any files they need outside the
+**Role:** Review the Coder's diff for code quality and report to the Quality
+Leader. Read-only: do not edit tracked files, install dependencies, commit,
+publish or delegate further. You may run quick, targeted checks that confirm a
+finding, such as one test file, a lint or type check of a changed file, a short
+script or a request to the running app; keep any files they need outside the
 checkout. Do not run the whole unit suite, e2e tests, the build or other slow
-checks the Coder runs after the rounds, and do not start, restart or
-reconfigure the app.
+checks the Coder runs after the rounds, and do not start, restart or reconfigure
+the app.
 
 **Focus**
 

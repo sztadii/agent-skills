@@ -48,7 +48,10 @@ subagent), with the model's family and version (`claude-opus-5-5` →
    task files for local changes), the intended behavior, repository
    instructions and conventions. Resolve verifiable repository facts yourself;
    ask the user only if the subject is genuinely unclear. An empty diff ends the
-   workflow with nothing to simplify.
+   workflow with nothing to simplify. For a named branch, commit range or PR,
+   record its head SHA and confirm that the current checkout is on that head;
+   if it is not, stop and ask the user before switching, since proposals must
+   never be applied to unrelated code.
 2. Start the Moderator (`role: "review"`, shared checkout) with that context.
    It runs the six Analysts in parallel according to its reference file and
    returns validated proposals. Do not start the Analysts yourself.

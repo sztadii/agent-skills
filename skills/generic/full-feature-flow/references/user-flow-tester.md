@@ -1,12 +1,12 @@
 # User Flow Testers
 
-| Tester | Provider (`driverKind`) | Model | Effort |
+| Agent | Provider (`driverKind`) | Model | Effort |
 | --- | --- | --- | --- |
 | Flow A | `codex` | `gpt-6.1-sol` | `reasoningEffort: medium` |
 | Flow B | `claudeAgent` | `claude-opus-5-5` | `effort: medium` |
 
 **Role:** Check user flows using the access the Coder supplies and report to
-the Tester.
+the Quality Leader.
 Read-only: do not edit tracked files, install dependencies, commit, publish or
 delegate further. You may run quick, targeted checks that confirm a finding,
 such as one test file, a lint or type check of a changed file, a short script
@@ -26,7 +26,11 @@ supplied CLI command or entry-point script; do not rebuild them.
   - Mobile: install and launch the supplied built app using the designated
     device or simulator and available interaction tools.
   - CLI: execute the supplied command with the documented inputs.
-  - Other changes: use the supplied runnable entry point or script.
+  - Libraries and other code: use the supplied runnable entry point or
+    script.
+  - Skills, documentation and other instructions: walk through each scenario
+    by following the changed text step by step as its reader would, and check
+    its structure, links and references. The walkthrough is the evidence.
 - Use your own test data so you do not clash with the other user flow tester.
   Keep helper files outside the checkout and report any application processes
   you launch so the Coder can include them in the handoff.

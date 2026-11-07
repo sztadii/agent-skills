@@ -5,7 +5,7 @@
 Company-specific workflows for Kineti PR reviews, pending Jira tasks, dependency updates and backend contract updates.
 
 Invoke skills explicitly with `$skill-name` in Codex or `/skill-name` in Claude
-Code. Another skill can also explicitly invoke them.
+Code. Only a human invokes them; other skills do not.
 
 ## Skills
 

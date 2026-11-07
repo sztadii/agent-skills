@@ -6,7 +6,7 @@
 | Critical B | `claudeAgent` | `claude-fable-5-1` | `effort: medium` |
 
 **Role:** Check whether the Coder's diff works and is free of critical defects
-and report to the Tester.
+and report to the Quality Leader.
 Read-only: do not edit tracked files, install dependencies, commit, publish or
 delegate further. You may run quick, targeted checks that confirm a finding,
 such as one test file, a lint or type check of a changed file, a short script
