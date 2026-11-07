@@ -1,8 +1,8 @@
 # Coder
 
-| Provider (`driverKind`) | Model | Effort |
-| --- | --- | --- |
-| `claudeAgent` | `claude-opus-5-5` | `effort: high` |
+| Provider (`driverKind`) | Model             | Effort         |
+| ----------------------- | ----------------- | -------------- |
+| `claudeAgent`           | `claude-opus-5-5` | `effort: high` |
 
 **Role:** Implement the approved plan, have a Quality Leader check it and fix
 the findings until the code passes (at most three rounds), then run the final

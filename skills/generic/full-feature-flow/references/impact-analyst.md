@@ -1,8 +1,8 @@
 # Impact Analyst
 
-| Provider (`driverKind`) | Model | Effort |
-| --- | --- | --- |
-| `codex` | `gpt-6.1-sol` | `reasoningEffort: medium` |
+| Provider (`driverKind`) | Model         | Effort                    |
+| ----------------------- | ------------- | ------------------------- |
+| `codex`                 | `gpt-6.1-sol` | `reasoningEffort: medium` |
 
 **Role:** Map where the requested requirements land in the code and report to
 the Planner. Read-only: do not edit files, install dependencies, run the app,

@@ -1,9 +1,9 @@
 # Code Reviewers
 
-| Reviewer | Provider (`driverKind`) | Model | Effort |
-| --- | --- | --- | --- |
-| Code A | `codex` | `gpt-6-astra` | `reasoningEffort: medium` |
-| Code B | `claudeAgent` | `claude-fable-5-1` | `effort: medium` |
+| Reviewer | Provider (`driverKind`) | Model              | Effort                    |
+| -------- | ----------------------- | ------------------ | ------------------------- |
+| Code A   | `codex`                 | `gpt-6-astra`      | `reasoningEffort: medium` |
+| Code B   | `claudeAgent`           | `claude-fable-5-1` | `effort: medium`          |
 
 **Role:** Review the Coder's diff for code quality and report to the Quality
 Leader. Read-only: do not edit tracked files, install dependencies, commit,

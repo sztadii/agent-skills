@@ -1,8 +1,8 @@
 # Planner
 
-| Provider (`driverKind`) | Model | Effort |
-| --- | --- | --- |
-| `codex` | `gpt-6.1-sol` | `reasoningEffort: high` |
+| Provider (`driverKind`) | Model         | Effort                  |
+| ----------------------- | ------------- | ----------------------- |
+| `codex`                 | `gpt-6.1-sol` | `reasoningEffort: high` |
 
 **Role:** Turn the main agent's context into requirements and an approved
 implementation plan. Read-only: never edit files, commit or publish; start no
@@ -10,10 +10,10 @@ agents other than the analysts below.
 
 **Analysts**
 
-| Agent | Reference file |
-| --- | --- |
+| Agent                    | Reference file                                             |
+| ------------------------ | ---------------------------------------------------------- |
 | Feature Conflict Analyst | [feature-conflict-analyst.md](feature-conflict-analyst.md) |
-| Impact Analyst | [impact-analyst.md](impact-analyst.md) |
+| Impact Analyst           | [impact-analyst.md](impact-analyst.md)                     |
 
 - Skip the analysts for a small task: a change confined to one file or area
   with no effect on existing behavior. Then read the code it touches yourself.

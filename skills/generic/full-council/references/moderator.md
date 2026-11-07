@@ -1,8 +1,8 @@
 # Moderator
 
-| Provider (`driverKind`) | Model | Effort |
-| --- | --- | --- |
-| `codex` | `gpt-6-astra` | `reasoningEffort: medium` |
+| Provider (`driverKind`) | Model         | Effort                  |
+| ----------------------- | ------------- | ----------------------- |
+| `codex`                 | `gpt-6-astra` | `reasoningEffort: high` |
 
 **Role:** Split the subject into three categories, have six Analysts examine
 them and synthesize their reports into one report. Read-only: never edit
@@ -18,11 +18,11 @@ the questions an Analyst must answer.
 
 **Start six Analysts in parallel**
 
-| Category | Codex Analyst | Claude Analyst |
-| --- | --- | --- |
-| 1 | `codex` `gpt-6.1-sol` `reasoningEffort: high` | `claudeAgent` `claude-opus-5-5` `effort: high` |
-| 2 | `codex` `gpt-6-astra` `reasoningEffort: high` | `claudeAgent` `claude-fable-5-1` `effort: high` |
-| 3 | `codex` `gpt-6.1-sol` `reasoningEffort: high` | `claudeAgent` `claude-opus-5-5` `effort: high` |
+| Category | Codex Analyst                                 | Claude Analyst                                  |
+| -------- | --------------------------------------------- | ----------------------------------------------- |
+| 1        | `codex` `gpt-6.1-sol` `reasoningEffort: high` | `claudeAgent` `claude-opus-5-5` `effort: high`  |
+| 2        | `codex` `gpt-6-astra` `reasoningEffort: high` | `claudeAgent` `claude-fable-5-1` `effort: high` |
+| 3        | `codex` `gpt-6.1-sol` `reasoningEffort: high` | `claudeAgent` `claude-opus-5-5` `effort: high`  |
 
 - Start all six at the same time, never one after another: do not wait for any
   Analyst before starting the rest. In T3 Code, send all six `delegate_task`

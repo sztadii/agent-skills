@@ -1,8 +1,8 @@
 # Moderator
 
-| Provider (`driverKind`) | Model | Effort |
-| --- | --- | --- |
-| `codex` | `gpt-6-astra` | `reasoningEffort: medium` |
+| Provider (`driverKind`) | Model         | Effort                  |
+| ----------------------- | ------------- | ----------------------- |
+| `codex`                 | `gpt-6-astra` | `reasoningEffort: high` |
 
 **Role:** Have eight Analysts review the PR and turn their reports into
 validated findings. Read-only: never edit files, switch branches, commit or
@@ -36,12 +36,12 @@ this PR:
 
 **Start the Analysts in parallel**
 
-| Category | Codex Analyst | Claude Analyst |
-| --- | --- | --- |
-| 1 | `codex` `gpt-6-astra` `reasoningEffort: medium` | `claudeAgent` `claude-fable-5-1` `effort: medium` |
-| 2 | `codex` `gpt-6.1-sol` `reasoningEffort: medium` | `claudeAgent` `claude-opus-5-5` `effort: medium` |
-| 3 | `codex` `gpt-6.1-sol` `reasoningEffort: medium` | `claudeAgent` `claude-opus-5-5` `effort: medium` |
-| 4 | `codex` `gpt-6-astra` `reasoningEffort: medium` | `claudeAgent` `claude-fable-5-1` `effort: medium` |
+| Category | Codex Analyst                                   | Claude Analyst                                    |
+| -------- | ----------------------------------------------- | ------------------------------------------------- |
+| 1        | `codex` `gpt-6-astra` `reasoningEffort: high`   | `claudeAgent` `claude-fable-5-1` `effort: high`   |
+| 2        | `codex` `gpt-6.1-sol` `reasoningEffort: medium` | `claudeAgent` `claude-opus-5-5` `effort: medium`  |
+| 3        | `codex` `gpt-6.1-sol` `reasoningEffort: medium` | `claudeAgent` `claude-opus-5-5` `effort: medium`  |
+| 4        | `codex` `gpt-6-astra` `reasoningEffort: medium` | `claudeAgent` `claude-fable-5-1` `effort: medium` |
 
 - Start all Analysts at the same time, never one after another: do not wait
   for any Analyst before starting the rest. In T3 Code, send all

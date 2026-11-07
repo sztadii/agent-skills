@@ -60,11 +60,11 @@ sending. Do not retry uncertain sends.
 
 **Team**
 
-| Name | GitHub ID (login) | Email | Slack DM channel ID | Working days |
-| --- | --- | --- | --- | --- |
-| Oleh Botsiun | `Boto1` | oleh@kineti.nl | `D08FRL221RB` | Monday–Friday |
-| Michał Grzeżułkowski | `michalg-kineti` | michal.g@kineti.nl | `D08FRUSPBHB` | Monday–Friday |
-| Jakub | `jakubwkineti` | jakub@kineti.nl | `D08G9H6N15H` | Tuesday–Thursday |
+| Name                 | GitHub ID (login) | Email              | Slack DM channel ID | Working days     |
+| -------------------- | ----------------- | ------------------ | ------------------- | ---------------- |
+| Oleh Botsiun         | `Boto1`           | oleh@kineti.nl     | `D08FRL221RB`       | Monday–Friday    |
+| Michał Grzeżułkowski | `michalg-kineti`  | michal.g@kineti.nl | `D08FRUSPBHB`       | Monday–Friday    |
+| Jakub                | `jakubwkineti`    | jakub@kineti.nl    | `D08G9H6N15H`       | Tuesday–Thursday |
 
 **Message**
 

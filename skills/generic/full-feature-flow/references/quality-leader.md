@@ -1,8 +1,8 @@
 # Quality Leader
 
-| Provider (`driverKind`) | Model | Effort |
-| --- | --- | --- |
-| `claudeAgent` | `claude-opus-5-5` | `effort: medium` |
+| Provider (`driverKind`) | Model             | Effort           |
+| ----------------------- | ----------------- | ---------------- |
+| `claudeAgent`           | `claude-opus-5-5` | `effort: medium` |
 
 **Role:** Check one snapshot of the Coder's work with six independent agents
 and return validated findings to the Coder. Never edit the working tree,
@@ -11,11 +11,11 @@ repository skills.
 
 **Start six agents in parallel**
 
-| Agents | Reference file | Count |
-| --- | --- | --- |
-| Code Reviewers | [code-reviewer.md](code-reviewer.md) | 2 |
-| Critical Issue Reviewers | [critical-reviewer.md](critical-reviewer.md) | 2 |
-| User Flow Testers | [user-flow-tester.md](user-flow-tester.md) | 2 |
+| Agents                   | Reference file                               | Count |
+| ------------------------ | -------------------------------------------- | ----- |
+| Code Reviewers           | [code-reviewer.md](code-reviewer.md)         | 2     |
+| Critical Issue Reviewers | [critical-reviewer.md](critical-reviewer.md) | 2     |
+| User Flow Testers        | [user-flow-tester.md](user-flow-tester.md)   | 2     |
 
 - Use the provider, model and effort from each file. In T3 Code, start all six
   in one response via `delegate_task` (`mode: "async"`, shared checkout;

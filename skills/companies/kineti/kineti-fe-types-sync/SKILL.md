@@ -24,12 +24,13 @@ exists. Preserve others' work; absent PRs do not mean absent work.
 Fetch frontend/backend default branches and record SHAs. Use a current frontend
 base, preserving user work/history; report blockers instead of resetting,
 discarding or silently stashing. Verify these `kineti1` mappings against current
-config:
+config. Both frontends generate with `pnpm run generate-api-types`; backend
+inputs are under each backend's `docs/`:
 
-| Frontend | Backend inputs | Generation |
-| --- | --- | --- |
-| drones-frontend | drones-backend/docs/openapi.json, drones-backend/docs/ws_models.json, gdk-backend/docs/openapi.json | pnpm run generate-api-types; OpenAPI and WebSocket generators |
-| gdk-frontend | gdk-backend/docs/openapi.json | pnpm run generate-api-types; openapi-ts.config.ts |
+| Frontend        | Backend inputs                                                          | Generators            |
+| --------------- | ----------------------------------------------------------------------- | --------------------- |
+| drones-frontend | drones-backend: openapi.json, ws_models.json; gdk-backend: openapi.json | OpenAPI and WebSocket |
+| gdk-frontend    | gdk-backend: openapi.json                                               | openapi-ts.config.ts  |
 
 For other frontends, derive repositories, schema/output paths and commands from
 config; ask for missing mappings. Do not guess or edit BE code.
