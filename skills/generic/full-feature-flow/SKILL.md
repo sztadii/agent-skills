@@ -58,11 +58,10 @@ subagent), with the model's family and version (`claude-opus-5-5` →
    exactly three questions at once. Do not start the analysts yourself.
 3. Show the user all three questions together and wait for the answers. Send
    the answers to the Planner's thread (`t3_thread_send` to its child thread)
-   so it keeps its context; it returns a plan of at most six concise sentences.
+   so it keeps its context; it returns a complete plan.
 4. Show the user the complete plan and ask whether they approve it. If not,
    send their feedback to the same Planner thread and show the revised complete
-   plan, also limited to six concise sentences. Repeat until the user explicitly
-   approves. Never approve on the user's
+   plan. Repeat until the user explicitly approves. Never approve on the user's
    behalf or treat silence or unrelated replies as approval.
 5. After approval, stop the Planner (`task_cancel` its task) and keep the
    approved plan verbatim. If the user cancels, stop the Planner and end the

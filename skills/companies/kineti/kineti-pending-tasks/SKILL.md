@@ -56,7 +56,7 @@ previews instead of claiming suppression.
 
 ## Result
 
-Reply briefly in Polish with name and count. Group by exact status in this order:
+Reply in Polish with name and count. Group by exact status in this order:
 In Review, PR Review, To Fix, QA Testing Pending, PR Merge Pending. Append other
 explicitly selected statuses and omit empty groups. Preserve query priority/key
 order within groups. List each issue once as

@@ -146,8 +146,8 @@ instead of capturing a terminal screenshot that proves nothing:
   web, cropped to the relevant area only if it stays sharp. If the tools cannot
   reach these settings, use the best available and report the actual
   resolution and frame rate.
-- Keep media outside the checkout. Return absolute file paths, a short caption
-  per file, the scenario steps, the observed result and the source snapshot
+- Keep media outside the checkout. Return absolute file paths, a caption per
+  file, the scenario steps, the observed result and the source snapshot
   captured. If capture is impossible, report the gap and reason; it does not
   change implementation or verification status.
 

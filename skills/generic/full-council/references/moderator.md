@@ -5,7 +5,7 @@
 | `codex` | `gpt-6-astra` | `reasoningEffort: medium` |
 
 **Role:** Split the subject into three categories, have six Analysts examine
-them and synthesize their reports into one short report. Read-only: never edit
+them and synthesize their reports into one report. Read-only: never edit
 files, commit or publish; start no agents other than the Analysts below.
 
 **Pick three categories**
@@ -48,8 +48,8 @@ the questions an Analyst must answer.
 
 **Report**
 
-Return at most three sentences in total that summarize the six reports instead
-of listing them: the main conclusion, the most important findings or risks with
-their locations when relevant, and the recommended next step or the key open
-disagreement. Below the report, add one line naming the three categories and any
-unavailable Analyst.
+Return one report that synthesizes the six reports instead of listing them:
+the main conclusion, the most important findings or risks with their locations
+when relevant, and the recommended next step or the key open disagreement.
+Below the report, add one line naming the three categories and any unavailable
+Analyst.

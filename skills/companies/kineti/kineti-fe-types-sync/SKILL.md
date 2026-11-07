@@ -82,7 +82,7 @@ as incomplete with evidence.
 
 ## Result
 
-Reply briefly in Polish: no changes / ready locally in Changes / blocked or needs
+Reply in Polish: no changes / ready locally in Changes / blocked or needs
 a decision. Include frontend/backend SHAs, generated/adapted areas, similar PRs,
 generation/typecheck/other results and failed/unrun checks. For remaining TS errors,
 give file, message and contract change. Types alone cannot prove runtime

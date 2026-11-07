@@ -1,6 +1,6 @@
 ---
 name: full-council
-description: "Analyze code or a problem described in chat with a council of six agents across three categories, summarized in a report of at most three sentences. Trigger only when the user explicitly invokes this skill."
+description: "Analyze code or a problem described in chat with a council of six agents across three categories, summarized in one synthesized report. Trigger only when the user explicitly invokes this skill."
 ---
 
 # Full Council
@@ -10,9 +10,9 @@ description: "Analyze code or a problem described in chat with a council of six 
 Get a multi-model analysis of a subject: code (files, a diff, a PR or a module)
 or a problem described in the conversation. A Moderator picks three categories
 for the subject, gives each to two Analysts, one Codex and one Claude, and turns
-their six reports into one report of at most three sentences. The main agent
-(you) only orchestrates: it gathers context, starts the Moderator and relays its
-report. It does not analyze the subject itself.
+their six reports into one synthesized report. The main agent (you) only
+orchestrates: it gathers context, starts the Moderator and relays its report.
+It does not analyze the subject itself.
 
 Each role's model, effort, responsibilities and output live in its reference
 file; use them as written unless the user overrides a setting:
@@ -51,7 +51,7 @@ subagent), with the model's family and version (`claude-opus-5-5` →
 
 ## Result
 
-Relay the Moderator's report verbatim: at most three sentences that synthesize
-the six analyses rather than list them. Add one line naming the three categories
-and any agent that was unavailable. If the Moderator was unavailable or the
-workflow stopped, say which stage completed and what blocks the rest.
+Relay the Moderator's report verbatim: a synthesis of the six analyses rather
+than a list of them. Add one line naming the three categories and any agent
+that was unavailable. If the Moderator was unavailable or the workflow stopped,
+say which stage completed and what blocks the rest.

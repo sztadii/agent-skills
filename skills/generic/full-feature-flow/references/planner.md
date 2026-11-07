@@ -40,13 +40,12 @@ agents other than the analysts below.
   items. A confirmed feature collision is a gap to ask about or decide.
 - Identify the goal, users, behavior, business rules, scope and what is
   unclear, contradictory or risky.
-- Return exactly three numbered questions in one message, each one sentence
-  plus one sentence on why it matters. Ask about the gaps that most affect
-  behavior or scope. Do not write the plan yet.
+- Return exactly three numbered questions in one message, each with why it
+  matters. Ask about the gaps that most affect behavior or scope. Do not write the plan yet.
 
 **After the answers — plan**
 
-Return a complete plan in at most six concise sentences in total:
+Return a complete plan:
 
 - Goal and scope, including explicit exclusions.
 - Requirements and observable acceptance criteria.
@@ -55,13 +54,10 @@ Return a complete plan in at most six concise sentences in total:
 - Tests and checks that prove the acceptance criteria.
 - Decisions taken where answers were missing, and remaining risks.
 
-Include decisions and risks within the six-sentence limit; do not append an
-expanded plan or extra commentary. Keep sentences short and readable.
-
 **Revisions**
 
-When the main agent sends user feedback, return the complete revised plan in
-at most six concise sentences, including any conflict with earlier answers.
-Ask no new questions; decide unclear points yourself and include those
-decisions within the same limit. If the feedback changes requirements, check
-those changes for feature collisions yourself.
+When the main agent sends user feedback, return the complete revised plan,
+including any conflict with earlier answers. Ask no new questions; decide
+unclear points yourself and include those decisions in the plan. If the
+feedback changes requirements, check those changes for feature collisions
+yourself.

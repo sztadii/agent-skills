@@ -79,7 +79,7 @@ conversations, Slack or Jira for coordination; the user handles it.
 
 ## Result
 
-Reply briefly in Polish with old/target versions, base SHA, changed areas,
+Reply in Polish with old/target versions, base SHA, changed areas,
 adaptations, actual check results and blockers, including failed/unrun checks.
 Ready requires all required checks passing on final local changes. A partial
 install is incomplete; typecheck alone cannot prove runtime compatibility.
