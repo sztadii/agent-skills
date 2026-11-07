@@ -83,7 +83,7 @@ subagent), with the model's family and version (`claude-opus-5-5` →
    suite, e2e tests and build. If any fail, it fixes them and reruns only the
    failures first, then reruns all final checks once those pass. When the change
    has visible behavior, it then captures, or reuses from earlier rounds, a
-   screenshot or 1080p 60 fps recording of the final version. It reports the
+   screenshot or 1080p recording of the final version. It reports the
    results, media and unresolved disagreements. Do not start the Quality Leader
    or its agents yourself.
 8. If the Coder returns a blocking question, relay it to the user and send the

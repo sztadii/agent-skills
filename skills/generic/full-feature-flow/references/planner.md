@@ -51,7 +51,7 @@ Return a complete plan:
 - Requirements and observable acceptance criteria.
 - Implementation steps naming the files or areas to change, reusing existing
   code and patterns before adding new code.
-- Tests and checks that prove the acceptance criteria.
+- The smallest set of tests and checks that proves the acceptance criteria.
 - Decisions taken where answers were missing, and remaining risks.
 
 **Revisions**

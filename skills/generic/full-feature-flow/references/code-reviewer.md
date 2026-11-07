@@ -22,6 +22,11 @@ the app.
   when a plainer solution preserves behavior.
 - No excess code: nothing the approved plan does not need, no duplication of
   existing helpers, no dead code or speculative "for later" code.
+- Tests are code too: each new or changed test proves an acceptance criterion
+  or non-trivial logic that no other test already proves, and uses the file's
+  existing helpers and fixtures. Flag long hard-coded expected values, inline
+  logic an existing helper covers and assertions on incidental details. The
+  plan sets what must be proven, not how much test code it takes.
 - Consistent with the project: follows repository instructions and the
   patterns, structure and conventions of the surrounding code.
 

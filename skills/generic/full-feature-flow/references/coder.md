@@ -141,11 +141,11 @@ instead of capturing a terminal screenshot that proves nothing:
   capture against the handed-off version with the available browser, device,
   simulator or terminal tools. Do not rebuild for capture, fabricate proof or
   substitute a mockup.
-- Record video at 1920×1080 and 60 fps. Take screenshots as lossless PNG at
-  the device's native resolution, with a viewport of at least 1920×1080 for
-  web, cropped to the relevant area only if it stays sharp. If the tools cannot
-  reach these settings, use the best available and report the actual
-  resolution and frame rate.
+- Record video at 1920×1080 at the highest frame rate the tools support. Take
+  screenshots as lossless PNG at the device's native resolution, with a
+  viewport of at least 1920×1080 for web, cropped to the relevant area only if
+  it stays sharp. If the tools cannot reach this resolution, use the best
+  available and report the actual resolution.
 - Keep media outside the checkout. Return absolute file paths, a caption per
   file, the scenario steps, the observed result and the source snapshot
   captured. If capture is impossible, report the gap and reason; it does not
