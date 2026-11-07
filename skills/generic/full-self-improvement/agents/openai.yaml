@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Self Improvement"
+  short_description: "Learns from the previous working day's threads and fixes skills that went wrong"
+  default_prompt: "Use $full-self-improvement to review the threads created on the previous working day for skills that were misinterpreted, made avoidable mistakes or ran unnecessary commands, and fix them without committing."
+policy:
+  allow_implicit_invocation: false
