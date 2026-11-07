@@ -28,6 +28,10 @@ the questions an Analyst must answer.
   Analyst before starting the rest. In T3 Code, send all six `delegate_task`
   calls in one response (`mode: "async"`, shared checkout, `role: "review"`)
   and follow `next` without polling.
+- Title each Analyst `<model> - <category> Analyst` (`title` in
+  `delegate_task`), with the model's family and version
+  (`claude-opus-5-5` → `Opus 5.5`, `gpt-6.1-sol` → `Sol 6.1`), for example
+  `Sol 6.1 - Performance Analyst`.
 - Give each the subject, the full context, its category task, user constraints
   and the absolute path of [analyst.md](analyst.md) to read first. Both Analysts
   of a category get the same brief. Do not share other Analysts' conclusions.

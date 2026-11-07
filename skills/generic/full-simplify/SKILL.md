@@ -39,7 +39,10 @@ role's reference file, and tell the agent to read it first. The Moderator also
 needs the absolute path of the Analyst's file to pass it down. In T3 Code, check
 `orchestrator_capabilities` once per thread and start agents with
 `delegate_task` using the provider, model and options from the reference file;
-follow each task's `next` without polling.
+follow each task's `next` without polling. Title every agent
+`<model> - <role>` (`title` in `delegate_task`, `description` for a native
+subagent), with the model's family and version (`claude-opus-5-5` →
+`Opus 5.5`, `gpt-6.1-sol` → `Sol 6.1`), for example `Astra 6 - Moderator`.
 
 1. Identify the subject: the base, the diff (staged, unstaged and untracked
    task files for local changes), the intended behavior, repository

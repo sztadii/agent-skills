@@ -52,7 +52,10 @@ also stops testing: report its gaps instead of retrying.
 
 - Start the Tester with the provider, model and effort from its file. In T3
   Code, use `delegate_task` (`role: "test"`, `mode: "async"`, shared checkout)
-  and follow `next` without polling.
+  and follow `next` without polling. Title it `<model> - Tester` (`title` in
+  `delegate_task`), with the model's family and version
+  (`claude-opus-5-5` → `Opus 5.5`, `gpt-6.1-sol` → `Sol 6.1`), for example
+  `Opus 5.5 - Tester`.
 - Brief it with the approved plan, the diff snapshot, repository instructions,
   your check results, the URL, artifact path or invocation with the setup
   instructions above, and the absolute paths of the Tester, Code Reviewers,

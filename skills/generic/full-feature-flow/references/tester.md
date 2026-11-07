@@ -21,6 +21,9 @@ repository skills.
   in one response via `delegate_task` (`mode: "async"`, shared checkout;
   `role: "review"` for reviewers, `role: "test"` for user flow testers) and
   follow `next` without polling.
+- Title each agent `<model> - <role>` (`title` in `delegate_task`), with
+  the model's family and version (`claude-opus-5-5` → `Opus 5.5`,
+  `gpt-6.1-sol` → `Sol 6.1`), for example `Astra 6 - Code Reviewer`.
 - Give each the same brief: the approved plan, the diff snapshot, repository
   instructions, the Coder's check results, the supplied URL, built artifact
   or command with setup instructions, and the absolute path of its own

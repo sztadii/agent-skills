@@ -20,7 +20,10 @@ agents other than the analysts below.
 - Otherwise start both in one response, as your first action, using the
   provider, model and effort from each file. In T3 Code, use `delegate_task`
   (`mode: "async"`, shared checkout, `role: "design"`) and follow `next`
-  without polling.
+  without polling. Title each `<model> - <role>` (`title` in
+  `delegate_task`), with the model's family and version
+  (`claude-opus-5-5` → `Opus 5.5`, `gpt-6.1-sol` → `Sol 6.1`), for example
+  `Sol 6.1 - Impact Analyst`.
 - Give each the same brief: the main agent's context, the requirements as
   you understand them, repository instructions and the absolute path of its
   own reference file to read first. Tell them they are read-only.
