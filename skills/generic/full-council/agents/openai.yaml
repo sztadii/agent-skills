@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Council"
+  short_description: "Six agents analyze code or a problem in three categories, summarized in three sentences"
+  default_prompt: "Use $full-council to have six agents analyze this code or problem in three categories and return a three-sentence report."
+policy:
+  allow_implicit_invocation: false

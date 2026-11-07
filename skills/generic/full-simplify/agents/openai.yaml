@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Simplify"
+  short_description: "A council of six agents finds a smaller, simpler change with the same behavior"
+  default_prompt: "Use $full-simplify to have a council find a smaller diff, redundant tests and reusable existing code in my change, then apply the best ones without committing."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Review PR"
+  short_description: "Eight agents review a PR for bugs, duplication, rule violations and Jira requirements"
+  default_prompt: "Use $full-review-pr to check out this PR, have eight agents review it and show me proposed comments. Publish only the comments I accept."
+policy:
+  allow_implicit_invocation: false

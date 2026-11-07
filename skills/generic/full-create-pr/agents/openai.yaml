@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Create PR"
+  short_description: "Commit, push with hooks and open a draft PR with supplied media"
+  default_prompt: "Use $full-create-pr to commit and push my changes through Git hooks, then publish a draft PR, attaching any screenshots or recordings already provided."
+policy:
+  allow_implicit_invocation: false

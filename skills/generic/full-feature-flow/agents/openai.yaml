@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Feature Flow"
+  short_description: "Plan with a Planner, implement with a Coder, test until it passes"
+  default_prompt: "Use $full-feature-flow to agree on a plan with the Planner, then have the Coder implement it, fix the Tester's review and user flow findings until a round passes, for at most three rounds, then return the app URL with screenshots or recordings of the final version."
+policy:
+  allow_implicit_invocation: false
