@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full T3 Clean"
+  short_description: "Archives settled threads, removes all worktrees and deletes local branches"
+  default_prompt: "Use $full-t3-clean to archive every settled T3 Code thread, remove every worktree and delete every local branch in ~/projects and ~/kineti."
+policy:
+  allow_implicit_invocation: false
