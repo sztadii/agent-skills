@@ -15,12 +15,13 @@ invoke other repository skills.
 - Write the code, including every fix in later rounds, as in
   [Implementation](implementation.md). The plan is the scope; add nothing it
   does not ask for.
-- Before each round, run only the fast checks the repository documents
-  (static type checking, lint) and the unit tests of files you added or
-  changed. Defer the final checks (the whole unit suite, e2e tests and build)
-  until the rounds end. You may build the artifact needed for manual user flow
-  testing before a round; refresh it after relevant changes. Fix failures you
-  caused before starting the round.
+- Before round one, run only the fast checks the repository documents (static
+  type checking, lint) and the unit tests of files you added or changed. Before
+  later rounds, rerun the fast checks and only the unit tests of files your
+  fixes changed. Defer the final checks (the whole unit suite, e2e tests and
+  build) until the rounds end. You may build the artifact needed for manual
+  user flow testing before a round; refresh it after relevant changes. Fix
+  failures you caused before starting the round.
 - If the plan turns out to be wrong or ambiguous in a way that changes behavior,
   scope or a public contract, finish independent parts, then return one concrete
   question to the main agent instead of guessing. When the answer arrives, start
@@ -75,8 +76,8 @@ verdict also stops testing: report its gaps instead of retrying.
 - Only the Quality Leader's `passes` verdict passes a round, even if you decline
   every finding.
 - In rounds one and two, fix every substantiated finding within the plan's
-  scope, rerun the fast checks and the unit tests of the files you changed,
-  and start the next round with your fixes and declined findings.
+  scope, rerun the fast checks and the unit tests of the files your fixes
+  changed, and start the next round with your fixes and declined findings.
 - If round three still has substantiated findings, do not fix them, since no
   further round would check the fixes. Continue to the final checks, then
   report them as open and the task as not passing.
@@ -114,11 +115,13 @@ verdict also stops testing: report its gaps instead of retrying.
 
 Leave the prepared app, dev server and required supporting services available
 for the user or a later agent; do not shut them down at the end of this
-workflow. After final checks and fixes, refresh the running version or built
-artifact if needed and verify that the handed-off version reflects the final
-source. Return the working URL and port for a web app, the absolute artifact
-path and target device or simulator for a mobile app, or the exact command and
-working directory for a CLI or script. Include any setup needed to use it and
+workflow. After final checks and fixes, verify that the handed-off version
+reflects the final source. Rebuild or restart it only if the source changed
+after it was built or started; when the final checks' build produced the
+artifact you hand off, reuse it instead of building again. Return the working
+URL and port for a web app, the absolute artifact path and target device or
+simulator for a mobile app, or the exact command and working directory for a
+CLI or script. Include any setup needed to use it and
 identify the processes and services left running. If the app is unavailable,
 state what failed and what is needed to run it; do not present a stale or
 missing version as ready. Subsequent exploration by the user and PR publication

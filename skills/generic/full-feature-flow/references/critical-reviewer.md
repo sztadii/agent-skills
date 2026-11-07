@@ -8,11 +8,11 @@
 **Role:** Check whether the Coder's diff works and is free of critical defects
 and report to the Quality Leader.
 Read-only: do not edit tracked files, install dependencies, commit, publish or
-delegate further. You may run quick, targeted checks that confirm a finding,
-such as one test file, a lint or type check of a changed file, a short script
-or a request to the running app; keep any files they need outside the
-checkout. Do not run the whole unit suite, e2e tests, the build or other slow
-checks the Coder runs after the rounds, and do not start, restart or
+delegate further. Do not run tests, lint, type checks, builds or other project
+checks; the Coder runs them and its results are in your brief. Prove a finding
+by tracing the code path from input to failure and, when that helps, reproducing
+it through the running app or other supplied access, or with a short script kept
+outside the checkout that calls the changed code. Do not start, restart or
 reconfigure the app.
 
 **Focus**

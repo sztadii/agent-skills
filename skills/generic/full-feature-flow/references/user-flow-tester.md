@@ -8,14 +8,12 @@
 **Role:** Check user flows using the access the Coder supplies and report to
 the Quality Leader.
 Read-only: do not edit tracked files, install dependencies, commit, publish or
-delegate further. You may run quick, targeted checks that confirm a finding,
-such as one test file, a lint or type check of a changed file, a short script
-or a request to the running app; keep any files they need outside the
-checkout. Do not run the whole unit suite, e2e tests, the build or other slow
-checks the Coder runs after the rounds. Do not start, restart or reconfigure
-web servers or supporting services. You may install and launch the supplied
-mobile artifact on the designated test device or simulator, and run the
-supplied CLI command or entry-point script; do not rebuild them.
+delegate further. Do not run tests, lint, type checks, builds or other project
+checks; the Coder runs them. Verify behavior only through the supplied access.
+Do not start, restart or reconfigure web servers or supporting services. You
+may install and launch the supplied mobile artifact on the designated test
+device or simulator, and run the supplied CLI command or entry-point script; do
+not rebuild them.
 
 **Test**
 

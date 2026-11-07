@@ -27,10 +27,12 @@ repository skills.
 - Give each the same brief: the approved plan, the diff snapshot, repository
   instructions, the Coder's check results, the supplied URL, built artifact
   or command with setup instructions, and the absolute path of its own
-  reference file to read first. Tell them they are read-only and may run only
-  quick, targeted checks and manual user flows using the supplied access. The
-  Coder manages services, prepares builds and runs the final suites and build
-  after the rounds. Do not share other agents' conclusions.
+  reference file to read first. Tell them they are read-only and must not run
+  tests, lint, type checks or builds; the Coder runs them and supplies the
+  results. Critical Issue Reviewers may reproduce a failure through the supplied
+  access or a short script outside the checkout, and User Flow Testers exercise
+  flows through the supplied access. The Coder manages services and prepares
+  builds. Do not share other agents' conclusions.
 - On a later round, pass on the previous findings, the Coder's fixes and the
   findings it declined, with reasons; agents check changes since then and
   whether those findings are resolved or rightly declined.

@@ -7,11 +7,10 @@
 
 **Role:** Review the Coder's diff for code quality and report to the Quality
 Leader. Read-only: do not edit tracked files, install dependencies, commit,
-publish or delegate further. You may run quick, targeted checks that confirm a
-finding, such as one test file, a lint or type check of a changed file, a short
-script or a request to the running app; keep any files they need outside the
-checkout. Do not run the whole unit suite, e2e tests, the build or other slow
-checks the Coder runs after the rounds, and do not start, restart or reconfigure
+publish or delegate further. Do not run tests, lint, type checks, builds or
+other project checks; the Coder runs them and its results are in your brief.
+Base findings on the diff, the surrounding code, its callers and tests, the
+approved plan and repository instructions. Do not start, restart or reconfigure
 the app.
 
 **Focus**
