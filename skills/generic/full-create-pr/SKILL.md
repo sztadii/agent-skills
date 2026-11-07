@@ -53,7 +53,9 @@ start, restart or stop apps or services.
 - Inspect the committed output and hook modifications. Include required generated
   files exactly as produced, preserving their order. Run required generation
   and checks on the final revision; reuse prior successful results only for
-  identical content. Repeat until generation leaves no diff. Do not lose hook
+  identical content. Repeat until generation leaves no diff, rerunning only after
+fixing a concrete cause; if unchanged inputs keep producing different output,
+stop and report it as a blocker. Do not lose hook
   edits or leave them uncommitted; include them before the successful push.
 - Recheck the remote branch before pushing and never overwrite remote commits
   without explicit authorization. On an ambiguous push failure, inspect remote

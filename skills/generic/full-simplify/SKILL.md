@@ -26,8 +26,8 @@ file; use them as written unless the user overrides a setting:
 - [Analyst](references/analyst.md)
 
 Invocation authorizes reading code, starting the agents above and editing the
-working tree to apply the validated proposals without asking for approval. The
-agents are read-only. It does not authorize commits, pushes, PR comments or
+working tree to apply the validated proposals without asking for approval. Only
+the main agent edits; the Moderator and Analysts are read-only. It does not authorize commits, pushes, PR comments or
 publication; leave the result uncommitted. Honor narrower user constraints and
 pass them to every agent.
 

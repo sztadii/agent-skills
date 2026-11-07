@@ -68,18 +68,22 @@ subagent), with the model's family and version (`claude-opus-5-5` →
 **Ask**
 
 If there are no findings, report that and stop without publishing. Otherwise
-draft one comment per finding as in [PR comments](references/pr-comments.md)
+fetch the PR's review comments, review bodies and discussion, including
+resolved and outdated threads. Set aside each finding an existing comment by
+anyone already raises, keeping it for the report with a link to that comment.
+A shared topic or location alone is not a duplicate, and a problem that recurs
+after its thread was resolved is not covered. If no findings remain, report
+that and stop. Draft one comment per remaining finding as in
+[PR comments](references/pr-comments.md)
 and show each with a short ID (`C1`, `C2`, …), its category, location, exact
 text and evidence. Ask the user to accept all, some or none, and wait. Never
 publish rejected or unanswered drafts.
 
 **Publish**
 
-1. Right before publishing, fetch the PR's review comments, review bodies and
-   discussion anew, including resolved and outdated threads. Skip each
-   accepted comment that raises the same or a closely related problem as an
-   existing comment by anyone, and keep it for the report with a link to that
-   comment.
+1. Right before publishing, fetch the existing comments again, since others may have commented
+   during the review. Skip each accepted comment now covered by an existing
+   one, as defined under **Ask**, and keep it for the report with a link.
 2. Publish the remaining accepted comments, with any user edits, in one
    COMMENT review against the recorded head SHA as in
    [PR comments](references/pr-comments.md). If the head moved, recheck that
@@ -91,7 +95,7 @@ publish rejected or unanswered drafts.
 Report the reviewed PR and head SHA, the checked-out branch, the Jira task or
 that none was linked, and the categories covered with any unavailable Analyst.
 List each finding with its ID, category, location and status: published (with
-URL), rejected, or skipped because someone already left a similar comment
+URL), rejected, or skipped because an existing comment already covers it
 (with a link to it). State that no approval or change request was submitted and
 the PR is not monitored. If the workflow stopped, say which stage completed and
 what blocks the rest.

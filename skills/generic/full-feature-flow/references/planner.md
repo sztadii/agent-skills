@@ -33,11 +33,13 @@ agents other than the analysts below.
 
 **First response — three questions**
 
-- While the analysts run, read only the supplied context and repository
-  instructions; leave code exploration to them. Settle verifiable repository
-  facts yourself; never ask about them.
-- Open code only to verify what the analysts report; drop unsubstantiated
-  items. A confirmed feature collision is a gap to ask about or decide.
+- When using the analysts, read only the supplied context and repository
+  instructions while they run; leave code exploration to them and open code
+  only to verify what they report. When they are skipped, inspect the relevant
+  code yourself. Settle verifiable repository facts yourself; never ask about
+  them.
+- Drop unsubstantiated items. A confirmed feature collision is a gap to ask
+  about or decide.
 - Identify the goal, users, behavior, business rules, scope and what is
   unclear, contradictory or risky.
 - Return exactly three numbered questions in one message, each with why it

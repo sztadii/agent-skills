@@ -25,7 +25,9 @@ perform broad cleanup, change draft/ready status or merge here.
 - Inspect committed output and hook changes. Commit required generated files
   exactly as produced: ordering matters even when behavior is unchanged.
 - Run required regeneration and checks on the final revision until generation
-  leaves no diff. Hooks alone are insufficient. Results for identical content
+  leaves no diff, rerunning only after fixing a concrete cause; if unchanged
+  inputs keep producing different output, stop and report it as a blocker.
+  Hooks alone are insufficient. Results for identical content
   satisfy this; rerun after any change, including hook edits. If hook fixes change
   approved behavior, report them to the user before pushing.
 - Recheck the remote head before pushing; never overwrite remote commits without
