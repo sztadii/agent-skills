@@ -1,8 +1,8 @@
 # Coder
 
-| Provider (`driverKind`) | Model             | Effort         |
-| ----------------------- | ----------------- | -------------- |
-| `claudeAgent`           | `claude-opus-5-5` | `effort: high` |
+| Provider (`driverKind`) | Model family | Effort         |
+| ----------------------- | ------------ | -------------- |
+| `claudeAgent`           | `Opus`       | `effort: high` |
 
 **Role:** Implement the approved plan, have a Quality Leader check it and fix
 the findings until the code passes (at most three rounds), then run the final
@@ -54,17 +54,19 @@ A round passes on the Quality Leader's `passes` verdict. Stop at the first
 passing round or after the third round, whichever comes first. An `incomplete`
 verdict also stops testing: report its gaps instead of retrying.
 
-- Start the Quality Leader with the provider, model and effort from its file. In
-  T3 Code, use `delegate_task` (`role: "test"`, `mode: "async"`, shared
-  checkout) and follow `next` without polling. Title it
-  `<model> - Quality Leader` (`title` in `delegate_task`), with the model's
-  family and version (`claude-opus-5-5` → `Opus 5.5`, `gpt-6.1-sol` →
-  `Sol 6.1`), for example `Opus 5.5 - Quality Leader`.
+- Start the Quality Leader with the provider, model family and effort from its
+  file, with the model ID your brief maps the family to. In T3 Code, use
+  `delegate_task` (`role: "test"`, `mode: "async"`, shared checkout) and follow
+  `next` without polling. Title it `<model> - Quality Leader` (`title` in
+  `delegate_task`), with the model's family and version (`claude-opus-5-5` →
+  `Opus 5.5`, `gpt-6.1-sol` → `Sol 6.1`), for example
+  `Opus 5.5 - Quality Leader`.
 - Brief it with the approved plan, the diff snapshot, repository instructions,
   your check results, the URL, artifact path or invocation with the setup
   instructions above, and the absolute paths of the Quality Leader, Code
-  Reviewers, Critical Issue Reviewers and User Flow Testers files, telling it to
-  read its own file first.
+  Reviewers, Critical Issue Reviewers and User Flow Testers files and the
+  model family-to-ID mapping from your brief, telling it to read its own file
+  first.
 - From round two, also give it the previous round's findings, your fixes and
   the findings you declined, with reasons; its agents check changes since
   that round and whether those findings are resolved or rightly declined.

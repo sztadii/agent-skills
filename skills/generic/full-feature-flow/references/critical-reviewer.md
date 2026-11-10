@@ -1,9 +1,9 @@
 # Critical Issue Reviewers
 
-| Reviewer   | Provider (`driverKind`) | Model              | Effort                    |
-| ---------- | ----------------------- | ------------------ | ------------------------- |
-| Critical A | `codex`                 | `gpt-6-astra`      | `reasoningEffort: medium` |
-| Critical B | `claudeAgent`           | `claude-fable-5-1` | `effort: medium`          |
+| Reviewer   | Provider (`driverKind`) | Model family | Effort                    |
+| ---------- | ----------------------- | ------------ | ------------------------- |
+| Critical A | `codex`                 | `Astra`      | `reasoningEffort: medium` |
+| Critical B | `claudeAgent`           | `Fable`      | `effort: medium`          |
 
 **Role:** Check whether the Coder's diff works and is free of critical defects
 and report to the Quality Leader.

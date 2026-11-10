@@ -1,9 +1,9 @@
 # User Flow Testers
 
-| Agent  | Provider (`driverKind`) | Model             | Effort                    |
-| ------ | ----------------------- | ----------------- | ------------------------- |
-| Flow A | `codex`                 | `gpt-6.1-sol`     | `reasoningEffort: medium` |
-| Flow B | `claudeAgent`           | `claude-opus-5-5` | `effort: medium`          |
+| Agent  | Provider (`driverKind`) | Model family | Effort                    |
+| ------ | ----------------------- | ------------ | ------------------------- |
+| Flow A | `codex`                 | `Sol`        | `reasoningEffort: medium` |
+| Flow B | `claudeAgent`           | `Opus`       | `effort: medium`          |
 
 **Role:** Check user flows using the access the Coder supplies and report to
 the Quality Leader.

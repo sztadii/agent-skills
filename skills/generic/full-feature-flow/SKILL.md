@@ -43,7 +43,12 @@ needs the paths of its analysts' files, and the Coder the paths of the
 Quality Leader's and its agents' files, to pass them down. In T3
 Code, check `orchestrator_capabilities` once per thread and start agents with
 `delegate_task` using the provider, model and options from the reference file;
-follow each task's `next` without polling. Title every agent
+follow each task's `next` without polling. Reference files name a model family
+(`Opus`, `Fable`, `Sol`, `Astra`), not a version: resolve each family to the
+newest model ID of that family listed by `orchestrator_capabilities` (use its
+`search` when the short list omits it) and pass the family-to-ID mapping in
+every brief, so nested agents use the same IDs. Report a family with no model
+instead of substituting another. Title every agent
 `<model> - <role>` (`title` in `delegate_task`, `description` for a native
 subagent), with the model's family and version (`claude-opus-5-5` →
 `Opus 5.5`, `gpt-6.1-sol` → `Sol 6.1`), for example `Sol 6.1 - Planner`.

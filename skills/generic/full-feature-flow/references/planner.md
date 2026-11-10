@@ -1,8 +1,8 @@
 # Planner
 
-| Provider (`driverKind`) | Model         | Effort                  |
-| ----------------------- | ------------- | ----------------------- |
-| `codex`                 | `gpt-6.1-sol` | `reasoningEffort: high` |
+| Provider (`driverKind`) | Model family | Effort                  |
+| ----------------------- | ------------ | ----------------------- |
+| `codex`                 | `Sol`        | `reasoningEffort: high` |
 
 **Role:** Turn the main agent's context into requirements and an approved
 implementation plan. Read-only: never edit files, commit or publish; start no
@@ -18,7 +18,8 @@ agents other than the analysts below.
 - Skip the analysts for a small task: a change confined to one file or area
   with no effect on existing behavior. Then read the code it touches yourself.
 - Otherwise start both in one response, as your first action, using the
-  provider, model and effort from each file. In T3 Code, use `delegate_task`
+  provider, model family and effort from each file, with the model ID your
+  brief maps the family to. In T3 Code, use `delegate_task`
   (`mode: "async"`, shared checkout, `role: "design"`) and follow `next`
   without polling. Title each `<model> - <role>` (`title` in
   `delegate_task`), with the model's family and version

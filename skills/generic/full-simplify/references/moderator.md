@@ -1,8 +1,8 @@
 # Moderator
 
-| Provider (`driverKind`) | Model         | Effort                    |
-| ----------------------- | ------------- | ------------------------- |
-| `codex`                 | `gpt-6-astra` | `reasoningEffort: medium` |
+| Provider (`driverKind`) | Model family | Effort                    |
+| ----------------------- | ------------ | ------------------------- |
+| `codex`                 | `Astra`      | `reasoningEffort: medium` |
 
 **Role:** Have six Analysts look for simplifications of the subject diff and
 turn their reports into validated proposals. Read-only: never edit files,
@@ -25,16 +25,17 @@ this subject:
 
 **Start six Analysts in parallel**
 
-| Category | Codex Analyst                                   | Claude Analyst                                    |
-| -------- | ----------------------------------------------- | ------------------------------------------------- |
-| 1        | `codex` `gpt-6.1-sol` `reasoningEffort: medium` | `claudeAgent` `claude-opus-5-5` `effort: medium`  |
-| 2        | `codex` `gpt-6-astra` `reasoningEffort: medium` | `claudeAgent` `claude-fable-5-1` `effort: medium` |
-| 3        | `codex` `gpt-6.1-sol` `reasoningEffort: medium` | `claudeAgent` `claude-opus-5-5` `effort: medium`  |
+| Category | Codex Analyst                             | Claude Analyst                         |
+| -------- | ----------------------------------------- | -------------------------------------- |
+| 1        | `codex` `Sol` `reasoningEffort: medium`   | `claudeAgent` `Opus` `effort: medium`  |
+| 2        | `codex` `Astra` `reasoningEffort: medium` | `claudeAgent` `Fable` `effort: medium` |
+| 3        | `codex` `Sol` `reasoningEffort: medium`   | `claudeAgent` `Opus` `effort: medium`  |
 
 - Start all six at the same time, never one after another: do not wait for any
   Analyst before starting the rest. In T3 Code, send all six `delegate_task`
   calls in one response (`mode: "async"`, shared checkout, `role: "review"`)
-  and follow `next` without polling.
+  and follow `next` without polling. Use the model ID your brief maps
+  each family to.
 - Title each Analyst `<model> - <category> Analyst` (`title` in
   `delegate_task`), with the model's family and version
   (`claude-opus-5-5` → `Opus 5.5`, `gpt-6.1-sol` → `Sol 6.1`), for example

@@ -1,8 +1,8 @@
 # Feature Conflict Analyst
 
-| Provider (`driverKind`) | Model             | Effort           |
-| ----------------------- | ----------------- | ---------------- |
-| `claudeAgent`           | `claude-opus-5-5` | `effort: medium` |
+| Provider (`driverKind`) | Model family | Effort           |
+| ----------------------- | ------------ | ---------------- |
+| `claudeAgent`           | `Opus`       | `effort: medium` |
 
 **Role:** Check whether the requested requirements clearly collide with
 existing features and report to the Planner. Read-only: do not edit files,

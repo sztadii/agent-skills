@@ -1,8 +1,8 @@
 # Quality Leader
 
-| Provider (`driverKind`) | Model             | Effort           |
-| ----------------------- | ----------------- | ---------------- |
-| `claudeAgent`           | `claude-opus-5-5` | `effort: medium` |
+| Provider (`driverKind`) | Model family | Effort           |
+| ----------------------- | ------------ | ---------------- |
+| `claudeAgent`           | `Opus`       | `effort: medium` |
 
 **Role:** Check one snapshot of the Coder's work with six independent agents
 and return validated findings to the Coder. Never edit the working tree,
@@ -17,10 +17,11 @@ repository skills.
 | Critical Issue Reviewers | [critical-reviewer.md](critical-reviewer.md) | 2     |
 | User Flow Testers        | [user-flow-tester.md](user-flow-tester.md)   | 2     |
 
-- Use the provider, model and effort from each file. In T3 Code, start all six
-  in one response via `delegate_task` (`mode: "async"`, shared checkout;
-  `role: "review"` for reviewers, `role: "test"` for user flow testers) and
-  follow `next` without polling.
+- Use the provider, model family and effort from each file, with the model ID
+  your brief maps the family to. In T3 Code, start all six in one response via
+  `delegate_task` (`mode: "async"`, shared checkout; `role: "review"` for
+  reviewers, `role: "test"` for user flow testers) and follow `next` without
+  polling.
 - Title each agent `<model> - <role>` (`title` in `delegate_task`), with
   the model's family and version (`claude-opus-5-5` → `Opus 5.5`,
   `gpt-6.1-sol` → `Sol 6.1`), for example `Astra 6 - Code Reviewer`.
